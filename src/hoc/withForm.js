@@ -19,15 +19,19 @@ export const withForm = (Component) => {
                 academicDegree: Yup.string()
                     .required('Пожалуйста, введите ученую степерь'),
                 workExperience: Yup.number()
+                    .min(0, 'Опыт не может быть отрицательным')
+                    .max(120, 'Максимум 10 лет')
                     .required('Пожалуйста, введите опыт работы'),
                 dateOfBirth: Yup.date()
+                    //Брать текущую дату - 18 лет
                     .max('2004-01-01', 'Неправильная дата (max)')
+                    .min('1921-01-01', 'Максимум 100 лет')
                     .required('Пожалуйста, введите дату рождения'),
                 dateOfRegistration: Yup.date()
                     .max('2022-01-01', 'Неправильная дата (max)')
                     .required('Пожалуйста, введите дату оформления'),
                 dateOfDissertationDefense: Yup.date()
-                    .max('2030-01-01', 'Неправильная дата (max)')
+                    // .max('2030-01-01', 'Неправильная дата (max)')
                     .required('Пожалуйста, введите дату защиты кандидатской диссертации'),
             })
             return (

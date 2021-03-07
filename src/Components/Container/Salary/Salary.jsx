@@ -2,8 +2,6 @@ import React from 'react'
 import s from './Salary.module.scss'
 import { Formik, Form, Field, ErrorMessage} from 'formik'
 import TextError from "../../../Common/TextError";
-import Test from "../../../Common/Test";
-import {LineChart, CartesianGrid, Line, XAxis, YAxis, Tooltip} from "recharts";
 import Graphic from "../Graphic/Graphic";
 
 
@@ -53,7 +51,7 @@ const Salary = (props) => {
                         </div>
 
                         <div>
-                            <label htmlFor="workExperience">Опыт работы по должности ППС</label>
+                            <label htmlFor="workExperience">Опыт работы по должности ППС (мес)</label>
                             <Field
                                 id="workExperience"
                                 name="workExperience"
@@ -84,7 +82,7 @@ const Salary = (props) => {
                         </div>
 
                         <div>
-                            <label htmlFor="dateOfDissertationDefense">Дата защиты кандидатской диссертации</label>
+                            <label htmlFor="dateOfDissertationDefense">Предположительная дата защиты кандидатской диссертации</label>
                             <Field
                                 id="dateOfDissertationDefense"
                                 type="date"
@@ -98,9 +96,10 @@ const Salary = (props) => {
                     </Form>
                     )}
                 </Formik>
-
-                <Graphic salary={props.salary} />
-
+                {
+                    props.salary.length > 0 &&
+                    <Graphic salary={props.salary}/>
+                }
             </div>
         </div>
     )

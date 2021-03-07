@@ -22,6 +22,7 @@ const Container = (props) => {
 
     const handleSubmit = async (values) => {
 
+        console.log(values)
 
         try {
             let response = await apiRequest(values)
