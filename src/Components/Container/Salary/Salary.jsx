@@ -1,8 +1,10 @@
 import React from 'react'
 import s from './Salary.module.scss'
-import { Formik, Form, Field, ErrorMessage, FieldArray} from 'formik'
+import { Formik, Form, Field, ErrorMessage} from 'formik'
 import TextError from "../../../Common/TextError";
-import Test from "../../Test";
+import Test from "../../../Common/Test";
+import {LineChart, CartesianGrid, Line, XAxis, YAxis, Tooltip} from "recharts";
+import Graphic from "../Graphic/Graphic";
 
 
 const Salary = (props) => {
@@ -96,6 +98,9 @@ const Salary = (props) => {
                     </Form>
                     )}
                 </Formik>
+
+                <Graphic salary={props.salary} />
+
             </div>
         </div>
     )

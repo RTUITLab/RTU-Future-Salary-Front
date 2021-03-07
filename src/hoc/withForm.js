@@ -11,7 +11,7 @@ export const withForm = (Component) => {
                 academicDegreeCourse: '1', //Курс обучения
                 workExperience: 0, //Стаж работы по должности ППС
                 dateOfBirth: '2002-01-01', //Дата рождения
-                dateOfRegistration: '2021-02-09', //Дата оформления
+                dateOfRegistration: '2021-09-01', //Дата оформления
                 dateOfDissertationDefense: '2027-09-15', //Дата защиты кандидатской диссертации
             }
 

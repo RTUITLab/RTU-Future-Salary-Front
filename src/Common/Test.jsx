@@ -1,5 +1,6 @@
-import Slider, {Handle, Range, SliderTooltip} from 'rc-slider';
+import Slider, {Handle, SliderTooltip} from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import {getMonth} from "./getMonth";
 
 const Test = (props) => {
 
@@ -51,21 +52,3 @@ const Test = (props) => {
 
 export default Test
 
-const getMonth = (month) => {
-    const monthArr = [
-        'Январь',
-        'Февраль',
-        'Март',
-        'Апрель',
-        'Май',
-        'Июнь',
-        'Июль',
-        'Август',
-        'Сентябрь',
-        'Октябрь',
-        'Ноябрь',
-        'Декабрь',
-
-    ]
-    return (monthArr[month-1])
-}
