@@ -7,8 +7,8 @@ export const withForm = (Component) => {
 
         render() {
             const initialValues = {
-               academicDegree: 'PreСandidate',
-                academicDegreeCourse: '',
+                academicDegree: 'Master',
+                academicDegreeCourse: '1',
                 workExperience: '',
                 dateOfBirth: '',
                 dateOfRegistration: '',
@@ -21,6 +21,12 @@ export const withForm = (Component) => {
                 dateOfBirth: Yup.date()
                     .max('2004-01-01', 'Неправильная дата (max)')
                     .required('Пожалуйста, введите дату рождения'),
+                dateOfRegistration: Yup.date()
+                    .max('2021-01-01', 'Неправильная дата (max)')
+                    .required('Пожалуйста, введите дату оформления'),
+                dateOfDissertationDefense: Yup.date()
+                    .max('2030-01-01', 'Неправильная дата (max)')
+                    .required('Пожалуйста, введите дату защиты кандидатской диссертации'),
             })
             return (
                 <>
