@@ -1,22 +1,42 @@
 import React, {useState} from 'react'
 import Salary from "./Salary/Salary";
 import {withForm} from "../../hoc/withForm";
+import axios from "axios";
 
 const Container = (props) => {
 
-    const [academicDegree, setAcademicDegree] = useState('') //Ученая степень
-    const [academicDegreeCourse, setAcademicDegreeCourse] = useState('') //Курс обучения
-    const [workExperience, setWorkExperience] = useState('') //Стаж работы по должности ППС
-    const [dateOfBirth, setDateOfBirth] = useState('') //Дата рождения
-    const [dateOfRegistration, setDateOfRegistration] = useState('') //Дата оформления
-    const [dateOfDissertationDefense, setDateOfDissertationDefense] = useState('') //Дата защиты кандидатской диссертации
+    const [salary, setSalary] = useState('')
 
-    const handleSubmit = (values) => {
-        debugger
+    const apiRequest = (values) => {
+        let formdata = new FormData();
+
+        formdata.append('academic_degree', values.academicDegree)
+        formdata.append('academic_degree_course', values.academicDegreeCourse)
+        formdata.append('work_experience', values.workExperience)
+        formdata.append('date_of_birth', values.dateOfBirth)
+        formdata.append('date_of_registration', values.dateOfRegistration)
+        formdata.append('date_of_dissertation_defense', values.dateOfDissertationDefense)
+
+        return axios.post(`http://127.0.0.1:8000/api/data`, formdata)
+    }
+
+    const handleSubmit = async (values) => {
+
+
+        try {
+            let response = await apiRequest(values)
+            console.log(response.data)
+            setSalary(response.data)
+        }
+        catch (error) {
+            console.log('Error', error.toJSON())
+            window.alert('Error')
+        }
+
     }
 
     return (
-        <Salary {...props} handleSubmit={handleSubmit}
+        <Salary {...props} salary={salary} handleSubmit={handleSubmit}
         />
     )
 

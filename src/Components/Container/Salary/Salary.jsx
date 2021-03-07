@@ -51,6 +51,17 @@ const Salary = (props) => {
                         </div>
 
                         <div>
+                            <label htmlFor="workExperience">Опыт работы по должности ППС</label>
+                            <Field
+                                id="workExperience"
+                                name="workExperience"
+                                type='number'
+                            >
+                            </Field>
+                            <ErrorMessage name="workExperience" component={TextError} />
+                        </div>
+
+                        <div>
                             <label htmlFor="dateOfBirth">Дата рождения</label>
                             <Field
                                 id="dateOfBirth"
@@ -81,7 +92,7 @@ const Salary = (props) => {
                             <ErrorMessage name="dateOfDissertationDefense" component={TextError} />
                         </div>
 
-                        <button type="submit" disabled={isSubmitting}>Submit</button>
+                        <button type="submit" disabled={isSubmitting}>Рассчитать</button>
                     </Form>
                     )}
                 </Formik>
