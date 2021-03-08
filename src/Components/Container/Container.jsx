@@ -17,7 +17,7 @@ const Container = (props) => {
         formdata.append('date_of_registration', values.dateOfRegistration)
         formdata.append('date_of_dissertation_defense', values.dateOfDissertationDefense)
 
-        return axios.post(`http://127.0.0.1:8000/api/data`, formdata)
+        return axios.post(`http://127.0.0.1:8000/api/calculate`, formdata)
     }
 
     const handleSubmit = async (values) => {

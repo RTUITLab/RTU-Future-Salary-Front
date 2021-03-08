@@ -1,11 +1,14 @@
 import React from 'react'
-import s from './Salary.module.scss'
+// import s from './Salary.module.scss'
 import { Formik, Form, Field, ErrorMessage} from 'formik'
 import TextError from "../../../Common/TextError";
 import Graphic from "../Graphic/Graphic";
-
+import {format} from 'date-fns'
+import Test from "../../../Common/Test";
+import {getDateOfDissertation} from "../../../Common/getDate";
 
 const Salary = (props) => {
+
     return (
         <div className={'outer'}>
             <div className={'container'}>
@@ -14,18 +17,30 @@ const Salary = (props) => {
                         onSubmit={props.handleSubmit}
                         enableReinitialize
                 >
-                    {({ isSubmitting, getFieldProps, handleChange, handleBlur, values }) =>
+                    {({ isSubmitting, setFieldValue, getFieldProps, handleChange, handleBlur, values }) =>
                     (<Form>
                         <div>
-                            <label htmlFor="academicDegree">Ученая степень</label>
+                            <label htmlFor="academicDegree">Статус в момент оформления</label>
                                 <Field
                                     component="select"
                                     id="academicDegree"
                                     name="academicDegree"
                                     multiple={false}
+                                    onChange={(e) => {
+                                        let today = new Date()
+                                        handleChange(e)
+                                        setFieldValue('academicDegreeCourse', '1')
+                                        if(e.target.value === 'Specialist') {
+                                            setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist', '1'), 'yyyy-MM-dd'))
+                                        }
+                                        let dissertation = getDateOfDissertation(today, e.target.value, '1')
+                                        console.log('disser', dissertation)
+                                        setFieldValue('dateOfDissertationDefense', format(dissertation, 'yyyy-MM-dd'))
+                                    }}
                                 >
                                     <option value="Master">Магистр</option>
                                     <option value="PreСandidate">Аспирант</option>
+                                    <option value="Specialist">Специалист</option>
                                 </Field>
                         </div>
 
@@ -35,7 +50,16 @@ const Salary = (props) => {
                                     component="select"
                                     id="academicDegreeCourse"
                                     name="academicDegreeCourse"
-                                    multiple={false}
+                                    onChange={(e) => {
+                                        let today = new Date()
+                                        handleChange(e)
+                                        if(values.academicDegree === 'Specialist') {
+                                            setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist', e.target.value), 'yyyy-MM-dd'))
+                                        }
+                                        let dissertation = getDateOfDissertation(today, values.academicDegree, e.target.value)
+                                        console.log('disser', dissertation)
+                                        setFieldValue('dateOfDissertationDefense', format(dissertation, 'yyyy-MM-dd'))
+                                    }}
                                 >
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -45,6 +69,15 @@ const Salary = (props) => {
                                             <>
                                                 <option value="3">3</option>
                                                 <option value="4">4</option>
+                                            </>
+                                    }
+                                    {
+                                        values.academicDegree === 'Specialist'
+                                        &&
+                                            <>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
                                             </>
                                     }
                                 </Field>
@@ -71,15 +104,18 @@ const Salary = (props) => {
                             <ErrorMessage name="dateOfBirth" component={TextError} />
                         </div>
 
+
                         <div>
                             <label htmlFor="dateOfRegistration">Дата оформления</label>
                             <Field
                                 id="dateOfRegistration"
                                 type="date"
                                 name="dateOfRegistration"
+                                disabled={values.academicDegree === 'Specialist'}
                             />
                             <ErrorMessage name="dateOfRegistration" component={TextError} />
                         </div>
+
 
                         <div>
                             <label htmlFor="dateOfDissertationDefense">Предположительная дата защиты кандидатской диссертации</label>
@@ -87,6 +123,7 @@ const Salary = (props) => {
                                 id="dateOfDissertationDefense"
                                 type="date"
                                 name="dateOfDissertationDefense"
+                                disabled
                                 // component={Test}
                             />
                             <ErrorMessage name="dateOfDissertationDefense" component={TextError} />
