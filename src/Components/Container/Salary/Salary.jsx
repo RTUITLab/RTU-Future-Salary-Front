@@ -39,7 +39,7 @@ const Salary = (props) => {
                                     }}
                                 >
                                     <option value="Master">Магистр</option>
-                                    <option value="PreСandidate">Аспирант</option>
+                                    <option value="PreCandidate">Аспирант</option>
                                     <option value="Specialist">Специалист</option>
                                 </Field>
                         </div>
@@ -64,7 +64,7 @@ const Salary = (props) => {
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     {
-                                        values.academicDegree === 'PreСandidate'
+                                        values.academicDegree === 'PreCandidate'
                                         &&
                                             <>
                                                 <option value="3">3</option>
