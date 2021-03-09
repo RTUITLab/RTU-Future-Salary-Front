@@ -10,20 +10,19 @@ const Container = (props) => {
     const apiRequest = (values) => {
         let formdata = new FormData();
 
-        formdata.append('academic_degree', values.academicDegree)
-        formdata.append('academic_degree_course', values.academicDegreeCourse)
+        formdata.append('academic_status', values.academicDegree)
+        formdata.append('academic_course', values.academicDegreeCourse)
         formdata.append('work_experience', values.workExperience)
         formdata.append('date_of_birth', values.dateOfBirth)
         formdata.append('date_of_registration', values.dateOfRegistration)
-        formdata.append('date_of_dissertation_defense', values.dateOfDissertationDefense)
+        formdata.append('date_of_dissertation', values.dateOfDissertationDefense)
 
         return axios.post(`http://127.0.0.1:8000/api/calculate`, formdata)
     }
 
     const handleSubmit = async (values) => {
 
-        console.log(values)
-
+        // console.log(values)
         try {
             let response = await apiRequest(values)
             console.log(response.data)

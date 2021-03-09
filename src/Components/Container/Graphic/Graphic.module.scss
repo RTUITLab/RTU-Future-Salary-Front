@@ -1,8 +1,20 @@
 .gr {
-  width: 1000px !important;
-  height: 500px !important;
+    width: 1000px !important;
+    height: 500px !important;
 }
 
 .reference {
-  color: white;
+    color: white;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+}
+
+.round {
+    margin-right: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
 }

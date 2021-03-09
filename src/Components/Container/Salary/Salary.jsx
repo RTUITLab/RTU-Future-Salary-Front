@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage} from 'formik'
 import TextError from "../../../Common/TextError";
 import Graphic from "../Graphic/Graphic";
 import {format} from 'date-fns'
-import Test from "../../../Common/Test";
+// import Test from "../../../Common/Test";
 import {getDateOfDissertation} from "../../../Common/getDate";
 
 const Salary = (props) => {
@@ -31,11 +31,9 @@ const Salary = (props) => {
                                         handleChange(e)
                                         setFieldValue('academicDegreeCourse', '1')
                                         if(e.target.value === 'Specialist') {
-                                            setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist', '1'), 'yyyy-MM-dd'))
+                                            setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist', '1', 1), 'yyyy-MM-dd'))
                                         }
-                                        let dissertation = getDateOfDissertation(today, e.target.value, '1')
-                                        console.log('disser', dissertation)
-                                        setFieldValue('dateOfDissertationDefense', format(dissertation, 'yyyy-MM-dd'))
+                                        setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, e.target.value, '1', 15), 'yyyy-MM-dd'))
                                     }}
                                 >
                                     <option value="Master">Магистр</option>
@@ -54,11 +52,9 @@ const Salary = (props) => {
                                         let today = new Date()
                                         handleChange(e)
                                         if(values.academicDegree === 'Specialist') {
-                                            setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist', e.target.value), 'yyyy-MM-dd'))
+                                            setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist', e.target.value, 1), 'yyyy-MM-dd'))
                                         }
-                                        let dissertation = getDateOfDissertation(today, values.academicDegree, e.target.value)
-                                        console.log('disser', dissertation)
-                                        setFieldValue('dateOfDissertationDefense', format(dissertation, 'yyyy-MM-dd'))
+                                        setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, values.academicDegree, e.target.value, 15), 'yyyy-MM-dd', ))
                                     }}
                                 >
                                     <option value="1">1</option>

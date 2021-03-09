@@ -10,8 +10,7 @@ export const withForm = (Component) => {
         render() {
 
             let dissertation = new Date()
-            dissertation = format(getDateOfDissertation(dissertation, 'Master', '1'), 'yyyy-MM-dd')
-
+            dissertation = format(getDateOfDissertation(dissertation, 'Master', '1', 15), 'yyyy-MM-dd')
 
             const initialValues = {
                 academicDegree: 'Master', //Статус в момент оформления
