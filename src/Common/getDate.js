@@ -14,12 +14,19 @@ export const getDateOfDissertation = (today, status, course, day) => {
         else
             return new Date(today.getFullYear() + 5 - Math.floor(course), 8, day)
     }
-    else {
+    else if (status === 'Specialist_Registration') {
         if(today.getMonth() < 8) {
             return new Date(today.getFullYear() + 5 - Math.floor(course), 8, day)
         }
         else
             return new Date(today.getFullYear() + 6 - Math.floor(course), 8, day)
+    }
+    else {
+        if(today.getMonth() < 8) {
+            return new Date(today.getFullYear() + 9 - Math.floor(course), 8, day)
+        }
+        else
+            return new Date(today.getFullYear() + 10 - Math.floor(course), 8, day)
     }
 
 }

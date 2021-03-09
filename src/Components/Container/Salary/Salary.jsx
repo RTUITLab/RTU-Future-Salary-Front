@@ -31,7 +31,7 @@ const Salary = (props) => {
                                         handleChange(e)
                                         setFieldValue('academicDegreeCourse', '1')
                                         if(e.target.value === 'Specialist') {
-                                            setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist', '1', 1), 'yyyy-MM-dd'))
+                                            setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist_Registration', '1', 1), 'yyyy-MM-dd'))
                                         }
                                         setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, e.target.value, '1', 15), 'yyyy-MM-dd'))
                                     }}
@@ -52,7 +52,7 @@ const Salary = (props) => {
                                         let today = new Date()
                                         handleChange(e)
                                         if(values.academicDegree === 'Specialist') {
-                                            setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist', e.target.value, 1), 'yyyy-MM-dd'))
+                                            setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist_Registration', e.target.value, 1), 'yyyy-MM-dd'))
                                         }
                                         setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, values.academicDegree, e.target.value, 15), 'yyyy-MM-dd', ))
                                     }}
