@@ -20,6 +20,8 @@ const Graphic = (props) => {
         'blue', 'red', 'maroon', 'green', 'black', 'violet', 'orange', '#00FF00', '#7851A9'
     ]
 
+    let salary = getSalary(props.salary)
+
     const CustomizedAxisTick = (props) => {
 
         const { x, y, payload } = props;
@@ -42,16 +44,23 @@ const Graphic = (props) => {
                                 bottom: 10,
                             }}
                            type="monotone"
-                           data={props.salary}
+                           data={salary}
                 >
+                    <defs>
+                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#7BBBF9" stopOpacity={0.6}/>
+                            <stop offset="95%" stopColor="#7BBBF9" stopOpacity={0.1}/>
+                        </linearGradient>
+                    </defs>
                     <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
                     <XAxis dataKey={`date`}  height={70} tick={<CustomizedAxisTick />} />
                     {/*<Line type="monotone" name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="#0016FA" />*/}
                     <YAxis />
                     <Tooltip />
-                    <Area type="monotone" name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="#6673FF" />
+                    {/*connectNulls*/}
+                    <Area type="linear"  name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="url(#colorUv)" />
+                    <Area type="linear" name='Отпускные' dot={{r: 0}} activeDot={{r: 5}} dataKey="vacation_salary" stroke="red" fill="red" />
 
-                    {/*<ReferenceDot r={5} x={props.salary[0].date} y={props.salary[0].salary} fill={'blue'}  />*/}
                     {/*{*/}
                     {/*    props.salary.filter(s => s.events.length > 0).map(*/}
                     {/*        (s, index) => {*/}
@@ -103,20 +112,22 @@ const Graphic = (props) => {
 }
 export default Graphic
 
-// export const getSalary = (props) => {
-//
-//     let salary = []
-//
-//     salary = props.map(s => {
-//         return {
-//             ...s,
-//             salary: s.salary,
-//             month: `${getMonth(s.month)} ${s.year}`
-//         }
-//     })
-//
-//     return salary
-// }
+export const getSalary = (props) => {
+
+    let salary = []
+
+    salary = props.map(s => {
+         return {
+            ...s,
+            salary: s.vacation_status === true ? null : s.salary,
+            date: s.date,
+            vacation_salary: s.vacation_salary,
+            vacation_status: s.vacation_status,
+        }
+    })
+
+    return salary
+}
 
 // {/*<Label*/}
 // {/*    content={({ value, viewBox }) => {*/}
