@@ -101,3 +101,9 @@
 .event li {
     list-style: disc;
 }
+
+@media (max-width: 1000px) {
+    .gr {
+        width: 100vw !important;
+    }
+}
