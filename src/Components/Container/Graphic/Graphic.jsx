@@ -17,7 +17,7 @@ import s from './Graphic.module.scss'
 const Graphic = (props) => {
 
     const color = [
-        'blue', 'red', 'maroon', 'green', 'black', 'violet', 'orange', '#00FF00', '#7851A9'
+        'blue', '#A6E2EC', 'red', 'maroon', 'green', 'black', 'violet', 'orange', '#00FF00', '#7851A9'
     ]
 
     let salary = getSalary(props.salary)
@@ -48,8 +48,8 @@ const Graphic = (props) => {
                 >
                     <defs>
                         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#7BBBF9" stopOpacity={0.6}/>
-                            <stop offset="95%" stopColor="#7BBBF9" stopOpacity={0.1}/>
+                            <stop offset="5%" stopColor="#E3F3FF" stopOpacity={0.6}/>
+                            <stop offset="95%" stopColor="#FAFDFF" stopOpacity={0.1}/>
                         </linearGradient>
                     </defs>
                     <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
@@ -75,7 +75,7 @@ const Graphic = (props) => {
                         props.salary.filter(s => s.events.length > 0).map(
                             (s, index) => {
                                 return (
-                                    <ReferenceDot key={s.salary} r={5} x={s.date} y={s.salary} fill={color[index]}  />
+                                    <ReferenceDot key={s.salary} r={7.5} x={s.date} y={s.salary} strokeWidth={4} stroke={'black'} fill={color[index]}  />
                                 )
                             }
                         )

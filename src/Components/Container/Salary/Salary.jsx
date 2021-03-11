@@ -6,6 +6,7 @@ import Graphic from "../Graphic/Graphic";
 import {format} from 'date-fns'
 // import Test from "../../../Common/Test";
 import {getDateOfDissertation} from "../../../Common/getDate";
+import DateInput from "../../../Common/CustomInputs/Date/DateInput";
 
 const Salary = (props) => {
 
@@ -96,6 +97,7 @@ const Salary = (props) => {
                                 id="dateOfBirth"
                                 type="date"
                                 name="dateOfBirth"
+                                component={DateInput}
                             />
                             <ErrorMessage name="dateOfBirth" component={TextError} />
                         </div>
@@ -107,6 +109,7 @@ const Salary = (props) => {
                                 id="dateOfRegistration"
                                 type="date"
                                 name="dateOfRegistration"
+                                component={DateInput}
                                 disabled={values.academicDegree === 'Specialist'}
                             />
                             <ErrorMessage name="dateOfRegistration" component={TextError} />
