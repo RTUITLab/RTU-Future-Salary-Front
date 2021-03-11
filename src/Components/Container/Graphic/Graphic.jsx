@@ -113,13 +113,13 @@ const Graphic = (props) => {
                                             </div>
                                         </div>
                                         <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
-                                        <div className={`${s.td} ${s.event}`}>
+                                        <ul className={`${s.td} ${s.event}`}>
                                             {salary.events.map((e, index) => {
 
-                                                if(index < salary.events.length - 1) return <div className={s.eventItem} key={index}>{e}</div>
-                                                else return <div key={index}>{e}</div>
+                                                if(index < salary.events.length - 1) return <li className={s.eventItem} key={index}>{e}</li>
+                                                else return <li key={index}>{e}</li>
                                             })}
-                                        </div>
+                                        </ul>
                                     </div>
                                 )
                             }

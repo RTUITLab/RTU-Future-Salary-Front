@@ -15,7 +15,13 @@ export const withForm = (Component) => {
             let today = new Date()
 
             let minRegister = new Date()
+
             minRegister = format(minRegister, 'yyyy-MM-dd')
+
+            let maxRegister = new Date()
+
+            maxRegister = format(maxRegister.setDate(maxRegister.getDate() + 3652), 'yyyy-MM-dd') //10 лет
+
             today = format(today.setDate(today.getDate() - 6573), 'yyyy-MM-dd') //18 лет
 
             const initialValues = {
@@ -44,6 +50,7 @@ export const withForm = (Component) => {
                     .required('Пожалуйста, введите дату рождения'),
                 dateOfRegistration: Yup.date()
                     .min(minRegister, 'Оформление возможно только с сегодняшнего дня')
+                    .max(maxRegister, 'Можно указывать максимум на 10 лет вперед')
                     .required('Пожалуйста, введите дату оформления'),
                 dateOfDissertationDefense: Yup.date()
                     .required('Пожалуйста, введите дату защиты кандидатской диссертации'),
