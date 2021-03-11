@@ -17,7 +17,18 @@ const Container = (props) => {
         formdata.append('date_of_registration', values.dateOfRegistration)
         formdata.append('date_of_dissertation', values.dateOfDissertationDefense)
 
-        return axios.post(`http://127.0.0.1:8000/api/calculate`, formdata)
+        let baseUrl= ''
+
+        let debug = false
+
+        if(debug) {
+            baseUrl = process.env.REACT_APP_BASE_URL
+        }
+        else {
+            baseUrl = process.env.REACT_APP_PRODUCTION_URL
+        }
+
+        return axios.post(`${baseUrl}api/calculate`, formdata)
     }
 
     const handleSubmit = async (values) => {

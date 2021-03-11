@@ -17,7 +17,7 @@ import s from './Graphic.module.scss'
 const Graphic = (props) => {
 
     const color = [
-        '#93d67a', '#ffca54', '#69a4db', '#f76085', '#e395ff', 'black', 'violet', 'orange', '#00FF00', '#7851A9', '#A6E2EC'
+        '#93d67a', '#ffca54', '#69a4db', '#f76085', '#e395ff', '#A6E2EC', '#7851A9', '#00FF00', 'black', 'violet', 'orange',
     ]
 
     let salary = getSalary(props.salary)
@@ -88,9 +88,12 @@ const Graphic = (props) => {
             <div className={s.information}>
                 <h2 className={`${s.title} ${s.informationTitle}`}>Пояснительная информация</h2>
 
-                <div className={s.vacation}>
-                    — оплачиваемый отпуск
-                </div>
+                {
+                    props.salary.filter(s => s.vacation_status).length > 0 &&
+                    <div className={s.vacation}>
+                        — оплачиваемый отпуск
+                    </div>
+                }
                 <div className={s.table}>
                     <div className={s.legendItem}>
                         <div className={`${s.marker} ${s.tableTitle}`}>Маркер</div>
