@@ -24,6 +24,7 @@
     font-size: 24px;
     color: #495057;
     margin-bottom: 40px;
+    font-weight: normal;
 }
 
 .label {
@@ -54,6 +55,7 @@
 }
 
 .select {
+    border: solid 1px #ced4da;
     font-size: 16px;
     color: #495057;
     outline: none;
@@ -106,7 +108,8 @@
     border-radius: 20.5px;
     box-shadow: 0 4px 16px 0 #d3d3d3;
     background-color: #176eb5;
-    transition: all 0.4s ease
+    transition: all 0.4s ease;
+    margin-bottom: 60px;
 }
 
 .submitBtn:hover {

@@ -17,7 +17,7 @@ import s from './Graphic.module.scss'
 const Graphic = (props) => {
 
     const color = [
-        'blue', '#A6E2EC', 'red', 'maroon', 'green', 'black', 'violet', 'orange', '#00FF00', '#7851A9'
+        '#93d67a', '#ffca54', '#69a4db', '#f76085', '#e395ff', 'black', 'violet', 'orange', '#00FF00', '#7851A9', '#A6E2EC'
     ]
 
     let salary = getSalary(props.salary)
@@ -36,6 +36,7 @@ const Graphic = (props) => {
     }
     return (
         <>
+            <h2 className={s.title}>График зарплат</h2>
             <ResponsiveContainer className={s.gr}>
                 <AreaChart margin={{
                                 top: 20,
@@ -48,8 +49,8 @@ const Graphic = (props) => {
                 >
                     <defs>
                         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#E3F3FF" stopOpacity={0.6}/>
-                            <stop offset="95%" stopColor="#FAFDFF" stopOpacity={0.1}/>
+                            <stop offset="5%" stopColor="#E3F3FF" stopOpacity={1}/>
+                            <stop offset="100%" stopColor="#FAFDFF" stopOpacity={1}/>
                         </linearGradient>
                     </defs>
                     <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
@@ -58,8 +59,8 @@ const Graphic = (props) => {
                     <YAxis />
                     <Tooltip />
                     {/*connectNulls*/}
-                    <Area type="linear"  name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="url(#colorUv)" />
-                    <Area type="linear" name='Отпускные' dot={{r: 0}} activeDot={{r: 5}} dataKey="vacation_salary" stroke="red" fill="red" />
+                    <Area type="linear" name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="url(#colorUv)" />
+                    <Area type="linear" name='Отпускные' dot={{r: 0}} activeDot={{r: 5}} dataKey="vacation_salary" fillOpacity={1} stroke="#f66a69" fill="#f66a69" />
 
                     {/*{*/}
                     {/*    props.salary.filter(s => s.events.length > 0).map(*/}
@@ -75,7 +76,7 @@ const Graphic = (props) => {
                         props.salary.filter(s => s.events.length > 0).map(
                             (s, index) => {
                                 return (
-                                    <ReferenceDot key={s.salary} r={7.5} x={s.date} y={s.salary} strokeWidth={4} stroke={'black'} fill={color[index]}  />
+                                    <ReferenceDot key={s.salary} r={7.5} x={s.date} y={s.salary} strokeWidth={1} stroke={'black'} fill={color[index]}  />
                                 )
                             }
                         )
@@ -84,28 +85,45 @@ const Graphic = (props) => {
                 </AreaChart>
             </ResponsiveContainer>
 
-            <div className={s.legend}>
-                {
-                    props.salary.filter(s => s.events.length > 0).map(
-                        (salary, index) => {
+            <div className={s.information}>
+                <h2 className={`${s.title} ${s.informationTitle}`}>Пояснительная информация</h2>
 
-                            return (
-                                <div className={s.legendItem} key={color[index]}>
-                                    <span>{salary.date}&ensp;</span>
-                                    <span style={{backgroundColor: color[index]}} className={s.round}>
+                <div className={s.vacation}>
+                    — оплачиваемый отпуск
+                </div>
+                <div className={s.table}>
+                    <div className={s.legendItem}>
+                        <div className={`${s.marker} ${s.tableTitle}`}>Маркер</div>
+                        <div className={`${s.date} ${s.tableTitle}`}>Дата</div>
+                        <div className={`${s.event} ${s.tableTitle}`}>События</div>
+                    </div>
+                    {
+                        props.salary.filter(s => s.events.length > 0).map(
+                            (salary, index) => {
 
-                                    </span>
-                                    {salary.events.map((e, index) => {
+                                return (
+                                    <div className={s.legendItem} key={color[index]}>
 
-                                        if(index < salary.events.length - 1) return <span key={index}>{e}, </span>
-                                        else return <span key={index}>{e}</span>
-                                    })}
-                                </div>
-                            )
-                        }
-                    )
+                                        <div className={s.marker}>
+                                            <div style={{backgroundColor: color[index]}} className={s.round}>
 
-                }
+                                            </div>
+                                        </div>
+                                        <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
+                                        <div className={`${s.td} ${s.event}`}>
+                                            {salary.events.map((e, index) => {
+
+                                                if(index < salary.events.length - 1) return <div className={s.eventItem} key={index}>{e}</div>
+                                                else return <div key={index}>{e}</div>
+                                            })}
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        )
+
+                    }
+                </div>
             </div>
         </>
     )
