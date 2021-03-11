@@ -17,7 +17,7 @@ const DateInput = (props) => {
         <span className={s.date}>
             {/*<label htmlFor={props.id}>Дата</label>*/}
             <input disabled={disabled} className={s.dateInput} id={props.id} type="date" {...props.field}  />
-            <label htmlFor={props.id}><img onClick={() => document.getElementById(props.id).select()} className={s.calendar} src={calendar} alt="calendar"/></label>
+            <label htmlFor={props.id}><img className={s.calendar} src={calendar} alt="calendar"/></label>
         </span>
     )
 }

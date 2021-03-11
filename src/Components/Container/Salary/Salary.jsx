@@ -7,6 +7,7 @@ import {format} from 'date-fns'
 // import Test from "../../../Common/Test";
 import {getDateOfDissertation} from "../../../Common/getDate";
 import DateInput from "../../../Common/CustomInputs/Date/DateInput";
+import NumberInput from "../../../Common/CustomInputs/Number/NumberInput";
 
 const Salary = (props) => {
 
@@ -86,6 +87,7 @@ const Salary = (props) => {
                                 id="workExperience"
                                 name="workExperience"
                                 type='number'
+                                component={NumberInput}
                             >
                             </Field>
                             <ErrorMessage name="workExperience" component={TextError} />
