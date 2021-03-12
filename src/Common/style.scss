@@ -17,14 +17,6 @@
     padding-bottom: 30px;
 }
 
-.recharts-wrapper,
-.recharts-responsive-container,
-.recharts-surface {
-
-}
-
-
-
 @media (max-width: 1200px) {
     .container {
         padding: 0 10px 30px;
@@ -32,25 +24,18 @@
     .recharts-wrapper,
     .recharts-responsive-container,
     .recharts-surface {
-        width: 100vw !important;
-    }
-}
-
-@media (max-width: 1200px) {
-    .recharts-wrapper,
-    .recharts-responsive-container,
-    .recharts-surface {
         width: 99vw !important;
     }
 }
+
 @media (max-width: 882px) {
     .recharts-wrapper,
     .recharts-responsive-container,
     .recharts-surface {
-        width: 99vw !important;
         height: 400px !important;
     }
 }
+
 @media (max-width: 650px) {
     .recharts-wrapper,
     .recharts-responsive-container,
@@ -62,6 +47,7 @@
         display: none;
     }
 }
+
 @media (max-width: 480px) {
     .recharts-wrapper,
     .recharts-responsive-container,
@@ -75,6 +61,7 @@
 .recharts-responsive-container,
 .recharts-surface {
     @media print {
-        width: 1200px !important;
+        width: 1000px !important;
+        height: 500px !important;
     }
 }
