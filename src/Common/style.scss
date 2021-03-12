@@ -1,7 +1,8 @@
 .form__error {
     color: red;
     position: absolute;
-    bottom: -15px
+    font-size: 12px;
+    bottom: -12px
 }
 
 .outer {
@@ -16,11 +17,64 @@
     padding-bottom: 30px;
 }
 
-//.recharts-wrapper,
-//.recharts-responsive-container,
-//.recharts-surface {
-//    @media print {
-//        width: 100vw !important;
-//    }
-//}
-//
+.recharts-wrapper,
+.recharts-responsive-container,
+.recharts-surface {
+
+}
+
+
+
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 10px 30px;
+    }
+    .recharts-wrapper,
+    .recharts-responsive-container,
+    .recharts-surface {
+        width: 100vw !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .recharts-wrapper,
+    .recharts-responsive-container,
+    .recharts-surface {
+        width: 99vw !important;
+    }
+}
+@media (max-width: 882px) {
+    .recharts-wrapper,
+    .recharts-responsive-container,
+    .recharts-surface {
+        width: 99vw !important;
+        height: 400px !important;
+    }
+}
+@media (max-width: 650px) {
+    .recharts-wrapper,
+    .recharts-responsive-container,
+    .recharts-surface {
+        width: 98vw !important;
+        height: 300px !important;
+    }
+    .recharts-tooltip-wrapper {
+        display: none;
+    }
+}
+@media (max-width: 480px) {
+    .recharts-wrapper,
+    .recharts-responsive-container,
+    .recharts-surface {
+        width: 98vw !important;
+        height: 200px !important;
+    }
+}
+
+.recharts-wrapper,
+.recharts-responsive-container,
+.recharts-surface {
+    @media print {
+        width: 1200px !important;
+    }
+}

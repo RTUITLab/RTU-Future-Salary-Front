@@ -1,6 +1,17 @@
 .gr {
-    width: 1200px !important;
-    height: 500px !important;
+    //max-width: 1200px !important;
+    //width: 100vw !important;
+    //width: 100%;
+    //width: 900px !important;
+    //height: 500px !important;
+}
+
+.gr {
+    @media print {
+        display: block !important;
+        width: 900px !important;
+        max-height: 500px !important;
+    }
 }
 
 .reference {
@@ -16,7 +27,7 @@
 
 .graphicContainer {
     //display: flex;
-    //width: 100%;
+    //width: 1200px
 }
 
 .information {

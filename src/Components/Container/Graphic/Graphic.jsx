@@ -22,8 +22,6 @@ const Graphic = (props) => {
 
     let salary = getSalary(props.salary)
 
-    let events = ''
-
     const CustomizedAxisTick = (props) => {
 
         const { x, y, payload } = props;
@@ -40,15 +38,19 @@ const Graphic = (props) => {
         <>
             <h2 className={s.title}>График зарплат</h2>
             <div className={s.graphicContainer}>
-                <ResponsiveContainer className={s.gr}>
+                {/*<ResponsiveContainer className={s.gr}>*/}
                     <AreaChart margin={{
                                     top: 20,
                                     right: 30,
                                     left: 20,
                                     bottom: 10,
-                                }}
+                               }}
+                               width={1200}
+                               height={500}
+                               // maxWidth={1200}
                                type="monotone"
                                data={salary}
+                               className={s.gr}
                     >
                         <defs>
                             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -76,7 +78,7 @@ const Graphic = (props) => {
                         }
 
                     </AreaChart>
-                </ResponsiveContainer>
+                {/*</ResponsiveContainer>*/}
             </div>
 
             <div className={s.information}>

@@ -10,7 +10,7 @@
 .title {
     color: #212121;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 700;
     padding-top: 30px;
     margin-bottom: 40px;
     position: relative;
@@ -18,12 +18,16 @@
 
 .title:before {
     content: '';
+    display: inline-block;
     position: relative;
-    width: 6px;
+    width: 8px;
+    top: calc(-.1 * 1em);
+    vertical-align: middle;
+    //bottom: 0;
     height: 30px;
     background-color: #e5e5e5;
-    margin-right: 15px;
-    border-left: 6px solid #e5e5e5;
+    margin-right: calc(5px + .2em);
+    //border-left: 6px solid #e5e5e5;
 }
 
 .subtitle {
