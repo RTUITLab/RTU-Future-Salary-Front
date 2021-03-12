@@ -96,10 +96,11 @@ const Graphic = (props) => {
                             <div className={`${s.event} ${s.tableTitle}`}>События</div>
                         </div>
                         {
-                            props.salary.filter(s => s.events.length > 0).map(
-                                (salary, index) => {
+                            props.salary.filter(events => events.events.length > 0).map(
+                                (salary, index, events) => {
 
-                                    if(index % 2 === 0) {
+                                    if(index <= (events.length - 1)/2) {
+
                                         return (
                                             <div className={s.legendItem} key={color[index]}>
 
@@ -133,10 +134,10 @@ const Graphic = (props) => {
                             <div className={`${s.event} ${s.tableTitle}`}>События</div>
                         </div>
                         {
-                            props.salary.filter(s => s.events.length > 0).map(
-                                (salary, index) => {
+                            props.salary.filter(events => events.events.length > 0).map(
+                                (salary, index, events) => {
 
-                                    if(index % 2 === 1) {
+                                    if(index > (events.length - 1)/2) {
                                         return (
                                             <div className={s.legendItem} key={color[index]}>
 

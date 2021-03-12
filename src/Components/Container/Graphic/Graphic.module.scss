@@ -1,5 +1,5 @@
 .gr {
-    width: 1000px !important;
+    width: 1200px !important;
     height: 500px !important;
 }
 
@@ -125,6 +125,12 @@
 
 .event li {
     font-size: 12px;
+    list-style: disc;
+    margin-left: 15px;
+}
+
+.event li::marker {
+    //margin-left: 10px;
 }
 
 //@media (max-width: 1000px) {
