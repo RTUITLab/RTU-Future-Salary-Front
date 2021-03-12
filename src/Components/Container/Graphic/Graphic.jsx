@@ -40,7 +40,6 @@ const Graphic = (props) => {
         <>
             <h2 className={s.title}>График зарплат</h2>
             <div className={s.graphicContainer}>
-
                 <ResponsiveContainer className={s.gr}>
                     <AreaChart margin={{
                                     top: 20,
@@ -78,17 +77,17 @@ const Graphic = (props) => {
 
                     </AreaChart>
                 </ResponsiveContainer>
-                {/*{*/}
-                {/*    props.salary.filter(s => s.vacation_status).length > 0 &&*/}
-                {/*    <div className={s.vacation}>*/}
-                {/*        — оплачиваемый отпуск*/}
-                {/*    </div>*/}
-                {/*}*/}
             </div>
 
             <div className={s.information}>
                 <h2 className={`${s.title} ${s.informationTitle}`}>Пояснительная информация</h2>
 
+                {
+                    props.salary.filter(s => s.vacation_status).length > 0 &&
+                    <div className={s.vacation}>
+                        — оплачиваемый отпуск
+                    </div>
+                }
                 <div className={s.tableContainer}>
                     <div className={s.table}>
                         <div className={s.legendItem}>
@@ -105,9 +104,9 @@ const Graphic = (props) => {
                                             <div className={s.legendItem} key={color[index]}>
 
                                                 <div className={s.marker}>
-                                                    <div style={{backgroundColor: color[index]}} className={s.round}>
-
-                                                    </div>
+                                                    <svg  className={s.round}>
+                                                        <circle cx="9" cy="9" fill={color[index]} r={'9'} />
+                                                    </svg>
                                                 </div>
                                                 <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
                                                 <ul className={`${s.td} ${s.event}`}>
@@ -142,9 +141,9 @@ const Graphic = (props) => {
                                             <div className={s.legendItem} key={color[index]}>
 
                                                 <div className={s.marker}>
-                                                    <div style={{backgroundColor: color[index]}} className={s.round}>
-
-                                                    </div>
+                                                    <svg  className={s.round}>
+                                                        <circle cx="9" cy="9" fill={color[index]} r={'9'} />
+                                                    </svg>
                                                 </div>
                                                 <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
                                                 <ul className={`${s.td} ${s.event}`}>

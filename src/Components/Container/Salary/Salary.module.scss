@@ -1,9 +1,10 @@
 .form {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-column-gap: 30px;
     grid-row-gap: 15px;
     margin-bottom: 30px;
+    max-width: 920px;
 }
 
 .title {
@@ -11,7 +12,7 @@
     font-size: 30px;
     font-weight: bold;
     padding-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     position: relative;
 }
 

@@ -51,7 +51,7 @@ const Salary = (props) => {
                             </div>
 
                             <div className={s.section}>
-                                <label className={s.label}  htmlFor="dateOfRegistration">Укажите дату оформления договора</label>
+                                <label className={`${s.label} ${s.labelRight}`}  htmlFor="dateOfRegistration">Укажите дату оформления договора</label>
                                 <Field
                                     id="dateOfRegistration"
                                     type="date"
@@ -60,17 +60,6 @@ const Salary = (props) => {
                                     disabled={values.academicDegree === 'Specialist'}
                                 />
                                 <ErrorMessage name="dateOfRegistration" component={TextError} />
-                            </div>
-
-                            <div className={s.section}>
-                                <label className={`${s.label} ${s.labelRight}`}  htmlFor="dateOfBirth">Укажите Вашу дату рождения</label>
-                                <Field
-                                    id="dateOfBirth"
-                                    type="date"
-                                    name="dateOfBirth"
-                                    component={DateInput}
-                                />
-                                <ErrorMessage name="dateOfBirth" component={TextError} />
                             </div>
 
                             <div className={s.section}>
@@ -90,6 +79,10 @@ const Salary = (props) => {
                                         }}
                                     >
 
+                                        {
+                                            values.academicDegree === 'Master'
+                                            && <option value="0">0</option>
+                                        }
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         {
@@ -110,9 +103,21 @@ const Salary = (props) => {
                                                 </>
                                         }
                                     </Field>
-                                <label className={s.arrows} htmlFor="dateOfRegistration"><img src={arrows} alt="arrows"/></label>
+                                <label className={s.arrows} htmlFor="academicDegreeCourse"><img src={arrows} alt="arrows"/></label>
 
                             </div>
+
+                            <div className={s.section}>
+                                <label className={`${s.label} ${s.labelRight}`}  htmlFor="dateOfBirth">Укажите Вашу дату рождения</label>
+                                <Field
+                                    id="dateOfBirth"
+                                    type="date"
+                                    name="dateOfBirth"
+                                    component={DateInput}
+                                />
+                                <ErrorMessage name="dateOfBirth" component={TextError} />
+                            </div>
+
 
                             <div className={s.section}>
                                 <label className={s.label}  htmlFor="workExperience">Опыт работы по должности ППС (мес)</label>
