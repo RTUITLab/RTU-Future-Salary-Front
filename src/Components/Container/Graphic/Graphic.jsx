@@ -22,6 +22,8 @@ const Graphic = (props) => {
 
     let salary = getSalary(props.salary)
 
+    let events = ''
+
     const CustomizedAxisTick = (props) => {
 
         const { x, y, payload } = props;
@@ -37,95 +39,130 @@ const Graphic = (props) => {
     return (
         <>
             <h2 className={s.title}>График зарплат</h2>
-            <ResponsiveContainer className={s.gr}>
-                <AreaChart margin={{
-                                top: 20,
-                                right: 30,
-                                left: 20,
-                                bottom: 10,
-                            }}
-                           type="monotone"
-                           data={salary}
-                >
-                    <defs>
-                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#E3F3FF" stopOpacity={1}/>
-                            <stop offset="100%" stopColor="#FAFDFF" stopOpacity={1}/>
-                        </linearGradient>
-                    </defs>
-                    <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
-                    <XAxis dataKey={`date`}  height={70} tick={<CustomizedAxisTick />} />
-                    {/*<Line type="monotone" name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="#0016FA" />*/}
-                    <YAxis />
-                    <Tooltip />
-                    {/*connectNulls*/}
-                    <Area type="linear" name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="url(#colorUv)" />
-                    <Area type="linear" name='Отпускные' dot={{r: 0}} activeDot={{r: 5}} dataKey="vacation_salary" fillOpacity={1} stroke="#f66a69" fill="#f66a69" />
+            <div className={s.graphicContainer}>
 
-                    {/*{*/}
-                    {/*    props.salary.filter(s => s.events.length > 0).map(*/}
-                    {/*        (s, index) => {*/}
-                    {/*            return (*/}
-                    {/*                <ReferenceLine key={s.date} stroke={color[index]} isFront={true} segment={[{ x: s.date, y: 0 }, { x: s.date, y: s.salary } ]} />*/}
-                    {/*            )*/}
-                    {/*        }*/}
-                    {/*    )*/}
+                <ResponsiveContainer className={s.gr}>
+                    <AreaChart margin={{
+                                    top: 20,
+                                    right: 30,
+                                    left: 20,
+                                    bottom: 10,
+                                }}
+                               type="monotone"
+                               data={salary}
+                    >
+                        <defs>
+                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#E3F3FF" stopOpacity={1}/>
+                                <stop offset="100%" stopColor="#FAFDFF" stopOpacity={1}/>
+                            </linearGradient>
+                        </defs>
+                        <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
+                        <XAxis dataKey={`date`}  height={50} tick={<CustomizedAxisTick />} />
+                        {/*<Line type="monotone" name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="#0016FA" />*/}
+                        <YAxis />
+                        <Tooltip />
+                        {/*connectNulls*/}
+                        <Area type="linear" name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="url(#colorUv)" />
+                        <Area type="linear" name='Отпускные' dot={{r: 0}} activeDot={{r: 5}} dataKey="vacation_salary" fillOpacity={1} stroke="#f66a69" fill="#f66a69" />
+                        }
+                        {
+                            props.salary.filter(s => s.events.length > 0).map(
+                                (s, index) => {
+                                    return (
+                                        <ReferenceDot key={s.salary} r={7.5} x={s.date} y={s.salary} strokeWidth={1} stroke={'black'} fill={color[index]}  />
+                                    )
+                                }
+                            )
+                        }
 
-                    }
-                    {
-                        props.salary.filter(s => s.events.length > 0).map(
-                            (s, index) => {
-                                return (
-                                    <ReferenceDot key={s.salary} r={7.5} x={s.date} y={s.salary} strokeWidth={1} stroke={'black'} fill={color[index]}  />
-                                )
-                            }
-                        )
-                    }
-
-                </AreaChart>
-            </ResponsiveContainer>
+                    </AreaChart>
+                </ResponsiveContainer>
+                {/*{*/}
+                {/*    props.salary.filter(s => s.vacation_status).length > 0 &&*/}
+                {/*    <div className={s.vacation}>*/}
+                {/*        — оплачиваемый отпуск*/}
+                {/*    </div>*/}
+                {/*}*/}
+            </div>
 
             <div className={s.information}>
                 <h2 className={`${s.title} ${s.informationTitle}`}>Пояснительная информация</h2>
 
-                {
-                    props.salary.filter(s => s.vacation_status).length > 0 &&
-                    <div className={s.vacation}>
-                        — оплачиваемый отпуск
-                    </div>
-                }
-                <div className={s.table}>
-                    <div className={s.legendItem}>
-                        <div className={`${s.marker} ${s.tableTitle}`}>Маркер</div>
-                        <div className={`${s.date} ${s.tableTitle}`}>Дата</div>
-                        <div className={`${s.event} ${s.tableTitle}`}>События</div>
-                    </div>
-                    {
-                        props.salary.filter(s => s.events.length > 0).map(
-                            (salary, index) => {
+                <div className={s.tableContainer}>
+                    <div className={s.table}>
+                        <div className={s.legendItem}>
+                            <div className={`${s.marker} ${s.tableTitle}`}>Маркер</div>
+                            <div className={`${s.date} ${s.tableTitle}`}>Дата</div>
+                            <div className={`${s.event} ${s.tableTitle}`}>События</div>
+                        </div>
+                        {
+                            props.salary.filter(s => s.events.length > 0).map(
+                                (salary, index) => {
 
-                                return (
-                                    <div className={s.legendItem} key={color[index]}>
+                                    if(index % 2 === 0) {
+                                        return (
+                                            <div className={s.legendItem} key={color[index]}>
 
-                                        <div className={s.marker}>
-                                            <div style={{backgroundColor: color[index]}} className={s.round}>
+                                                <div className={s.marker}>
+                                                    <div style={{backgroundColor: color[index]}} className={s.round}>
 
+                                                    </div>
+                                                </div>
+                                                <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
+                                                <ul className={`${s.td} ${s.event}`}>
+                                                    {salary.events.map((e, index) => {
+
+                                                        if(index < salary.events.length - 1) return <li className={s.eventItem} key={index}>{e}</li>
+                                                        else return <li key={index}>{e}</li>
+                                                    })}
+                                                </ul>
                                             </div>
-                                        </div>
-                                        <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
-                                        <ul className={`${s.td} ${s.event}`}>
-                                            {salary.events.map((e, index) => {
+                                        )
+                                    }
+                                    else return
+                                }
+                            )
 
-                                                if(index < salary.events.length - 1) return <li className={s.eventItem} key={index}>{e}</li>
-                                                else return <li key={index}>{e}</li>
-                                            })}
-                                        </ul>
-                                    </div>
-                                )
-                            }
-                        )
+                        }
+                    </div>
 
-                    }
+                    <div className={s.table}>
+                        <div className={s.legendItem}>
+                            <div className={`${s.marker} ${s.tableTitle}`}>Маркер</div>
+                            <div className={`${s.date} ${s.tableTitle}`}>Дата</div>
+                            <div className={`${s.event} ${s.tableTitle}`}>События</div>
+                        </div>
+                        {
+                            props.salary.filter(s => s.events.length > 0).map(
+                                (salary, index) => {
+
+                                    if(index % 2 === 1) {
+                                        return (
+                                            <div className={s.legendItem} key={color[index]}>
+
+                                                <div className={s.marker}>
+                                                    <div style={{backgroundColor: color[index]}} className={s.round}>
+
+                                                    </div>
+                                                </div>
+                                                <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
+                                                <ul className={`${s.td} ${s.event}`}>
+                                                    {salary.events.map((e, index) => {
+
+                                                        if(index < salary.events.length - 1) return <li className={s.eventItem} key={index}>{e}</li>
+                                                        else return <li key={index}>{e}</li>
+                                                    })}
+                                                </ul>
+                                            </div>
+                                        )
+                                    }
+                                    else return
+                                }
+                            )
+
+                        }
+                    </div>
                 </div>
             </div>
         </>
@@ -150,28 +187,11 @@ export const getSalary = (props) => {
     return salary
 }
 
-// {/*<Label*/}
-// {/*    content={({ value, viewBox }) => {*/}
-// {/*        return (*/}
-// {/*            <ReferenceDot r={5} x={s.date} y={s.salary} fill="red"  />*/}
-// {/*            // <foreignObject {...viewBox} x={x + 10} y={y + 100} width={150}>*/}
-// {/*            //     <p className={s.reference}>Старший преподаватель</p>*/}
-// {/*            // </foreignObject>*/}
-// {/*        );*/}
-// {/*    }}*/}
-// {/*/>*/}
-// {/*<ReferenceDot r={5} x={'Декабрь 2024'} y={96785} fill="red"  />*/}
-// {/*<ReferenceLine stroke="red" position={"middle"} isFront={true} segment={[{ x: 'Декабрь 2024', y: 0 }, { x: 'Декабрь 2024', y: 96785 }]} >*/}
-// {/*    <Label*/}
-// {/*        content={({ value, viewBox }) => {*/}
-// {/*            const { x, y } = viewBox;*/}
-// {/*            return (*/}
-// {/*                <ReferenceDot  r={5} x={s.date} y={s.salary} fill="red"  />*/}
-// {/*                // <foreignObject {...viewBox} x={x + 10} y={y + 100} width={150}>*/}
-// {/*                //     <p className={s.reference}>Старший преподаватель</p>*/}
-// {/*                // </foreignObject>*/}
-// {/*            );*/}
-// {/*        }}*/}
-// {/*    />*/}
-// {/*</ReferenceLine>*/}
-// {/*<Legend />*/}
+export const getEvents = (props) => {
+
+    let event = []
+
+    event = props.filter(s => s.events.length > 0)
+
+    return event
+}

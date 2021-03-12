@@ -1,5 +1,5 @@
 .gr {
-    width: 1000px !important;
+    width: 1200px !important;
     height: 500px !important;
 }
 
@@ -10,9 +10,12 @@
 .title {
     font-size: 24px;
     color: #495057;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-weight: normal;
+}
 
+.graphicContainer {
+    display: flex;
 }
 
 .information {
@@ -20,11 +23,13 @@
 }
 
 .informationTitle {
-    margin-bottom: 56px;
+    margin-top: 10px;
 }
 
 .vacation {
+    margin-top: 45px;
     color: #212121;
+    font-size: 14px;
     position: relative;
     margin-bottom: 56px;
 }
@@ -39,22 +44,29 @@
 
 .legendItem {
     display: grid;
-    grid-template-columns: 1fr 1fr 3fr;
+    grid-template-columns: 1fr 1fr 5fr;
     align-items: center;
 
     border: 1px solid #ebedf4;
 }
 
 .round {
-    margin-right: 10px;
-    width: 25px;
-    height: 25px !important;
+    width: 18px;
+    height: 18px !important;
     border-radius: 15px;
     padding: 0 !important;
 }
 
+.tableContainer {
+    display: grid;
+    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+}
+
 .table {
     width: 100%;
+    display: grid;
     border-collapse: collapse;
     border: 1px solid #ebedf4;
     border-radius: 5px;
@@ -64,11 +76,16 @@
 
 .td {
     color: #495057;
+    padding-left: 12px;
+    font-size: 12px;
 }
 
 .tableTitle {
     font-weight: bold;
+    padding: 15px 0;
     color: #495057;
+    font-size: 14px;
+    min-height: 45px !important;
 }
 
 .marker {
@@ -88,8 +105,8 @@
 .event {
     display: flex;
     justify-content: center;
-    min-height: 94px;
-    padding-left: 100px;
+    min-height: 74px;
+    padding-left: 14px;
     flex-direction: column;
     border-left: 1px solid #ebedf4;
 }
@@ -99,7 +116,7 @@
 }
 
 .event li {
-    list-style: disc;
+    font-size: 12px;
 }
 
 @media (max-width: 1000px) {

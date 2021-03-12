@@ -1,9 +1,17 @@
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 15px;
+    margin-bottom: 30px;
+}
+
 .title {
     color: #212121;
     font-size: 30px;
     font-weight: bold;
-    padding-top: 60px;
-    margin-bottom: 60px;
+    padding-top: 30px;
+    margin-bottom: 30px;
     position: relative;
 }
 
@@ -14,9 +22,6 @@
     height: 30px;
     background-color: #e5e5e5;
     margin-right: 15px;
-    //padding-right: 6px;
-    ////padding-right: 15px;
-    //padding: 0 6px 0 0;
     border-left: 6px solid #e5e5e5;
 }
 
@@ -29,22 +34,26 @@
 
 .label {
     color: #495057;
-    font-size: 16px;
+    font-size: 14px;
+
+}
+
+.labelRight {
+    text-align: right;
 }
 
 .section {
     width: max-content;
     position: relative;
     grid-column-gap: 13px;
-    margin-bottom: 24px;
     align-items: center;
     display: grid;
-    grid-template-columns: 268px max-content;
+    grid-template-columns: 248px max-content;
 }
 
 .selectStatus {
     padding: 0 10px;
-    width: 211px;
+    width: 121px;
     height: 38px;
 }
 
@@ -56,7 +65,7 @@
 
 .select {
     border: solid 1px #ced4da;
-    font-size: 16px;
+    font-size: 14px;
     color: #495057;
     outline: none;
     border-radius: 4px;
@@ -73,6 +82,7 @@
 }
 
 .arrows {
+    pointer-events: none;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -89,8 +99,8 @@
 }
 
 .dissertationContainer {
-    margin-top: 34px;
-    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
 }
 
 .dissertation {
@@ -101,15 +111,15 @@
 .submitBtn {
     cursor: pointer;
     outline: none;
-    font-size: 16px;
+    font-size: 14px;
     color: white;
-    padding: 12px 42px;
+    padding: 10px 35px;
     border: none;
     border-radius: 20.5px;
     box-shadow: 0 4px 16px 0 #d3d3d3;
     background-color: #176eb5;
     transition: all 0.4s ease;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .submitBtn:hover {
