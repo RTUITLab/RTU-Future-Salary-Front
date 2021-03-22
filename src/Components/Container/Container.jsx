@@ -22,7 +22,7 @@ const Container = (props) => {
         let debug = false
 
         if(debug) {
-            baseUrl = process.env.REACT_APP_BASE_URL
+            baseUrl = "http://127.0.0.1:8000/"
         }
         else {
             baseUrl = process.env.REACT_APP_PRODUCTION_URL
