@@ -42,19 +42,12 @@ export const getDateOfDissertation = (today, status, course, day) => {
         }
         else {
             if(today.getMonth() < 8) {
-                return new Date(today.getFullYear(), 8, day)
+                return new Date(today.getFullYear() - 3, 8, day)
             }
             else
-                return new Date(today.getFullYear() + 1, 8, day)
+                return new Date(today.getFullYear() - 4, 8, day)
         }
     }
-    // else if (status === 'Specialist_Registration') {
-    //     if(today.getMonth() < 8) {
-    //         return new Date(today.getFullYear() + 5 - Math.floor(course), 8, day)
-    //     }
-    //     else
-    //         return new Date(today.getFullYear() + 6 - Math.floor(course), 8, day)
-    // }
     else {
         if(course !== '6') {
             if(today.getMonth() < 8) {
@@ -65,10 +58,10 @@ export const getDateOfDissertation = (today, status, course, day) => {
         }
         else {
             if(today.getMonth() < 8) {
-                return new Date(today.getFullYear() + 4 - Math.floor(course), 8, day)
+                return new Date(today.getFullYear() + 4, 8, day)
             }
             else
-                return new Date(today.getFullYear() + 5 - Math.floor(course), 8, day)
+                return new Date(today.getFullYear() + 5, 8, day)
         }
     }
 

@@ -38,15 +38,12 @@ const Salary = (props) => {
                                             let today = new Date()
                                             handleChange(e)
                                             setFieldValue('academicDegreeCourse', '1')
-                                            if(e.target.value === 'Specialist') {
-                                                setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist_Registration', '1', 1), 'yyyy-MM-dd'))
-                                            }
                                             setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, e.target.value, '1', 15), 'yyyy-MM-dd'))
-                                            setFieldValue('dateOfRegistration', format(getDateOfRegistration(e.target.value, values.academicDegreeCourse), 'yyyy-MM-dd'))
-
                                         }}
                                         onBlur={(e) => {
+                                            setFieldValue('dateOfRegistration', format(getDateOfRegistration(e.target.value, values.academicDegreeCourse), 'yyyy-MM-dd'))
                                             props.setMinRegisterDate(e.target.value, values.academicDegreeCourse) //Установка минимального срока оформления
+                                            props.setMinDissertationDate(e.target.value, values.academicDegreeCourse) //Установка минимального срока защиты кандидатской
                                         }}
                                     >
                                         <option value="Bachelor">Бакалавр</option>
@@ -77,19 +74,14 @@ const Salary = (props) => {
                                         id="academicDegreeCourse"
                                         name="academicDegreeCourse"
                                         onChange={(e) => {
-                                            let today = new Date()
                                             handleChange(e)
-                                            if(values.academicDegree === 'Specialist') {
-                                                //Установка минимальной даты оформления для специалиста, который еще не выпускник
-                                                setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist_Registration', e.target.value, 1), 'yyyy-MM-dd'))
-                                            }
+                                            let today = new Date()
                                             setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, values.academicDegree, e.target.value, 15), 'yyyy-MM-dd', ))
                                             setFieldValue('dateOfRegistration', format(getDateOfRegistration(values.academicDegree, e.target.value), 'yyyy-MM-dd'))
-
-
                                         }}
                                         onBlur={(e) => {
                                             props.setMinRegisterDate(values.academicDegree, e.target.value) //Установка минимального срока оформления
+                                            props.setMinDissertationDate(values.academicDegree, e.target.value) //Установка минимального срока защиты кандидатской
                                         }}
                                     >
 

@@ -2,6 +2,7 @@ import React from "react";
 import * as Yup from "yup";
 import {format} from 'date-fns'
 import {getDateOfDissertation} from "../Common/getDateOfDissertation";
+import {getDateOfRegistration} from "../Common/getDateOfRegistration";
 
 export const withForm = (Component) => {
 
@@ -10,7 +11,8 @@ export const withForm = (Component) => {
         constructor(props) {
             super(props);
             this.state = {
-                minRegister: format(new Date(), 'yyyy-MM-dd') //Сегодняшний день
+                minRegister: format(getDateOfRegistration('Master', '1'), 'yyyy-MM-dd'),
+                minDissertation:format(getDateOfDissertation(new Date(), 'Master', '1', 15), 'yyyy-MM-dd'),
             }
         }
 
@@ -18,7 +20,6 @@ export const withForm = (Component) => {
 
             const setMinRegisterDate = (status, course) => {
                 let today = new Date()
-
                 if(status === 'Master') {
                     if(course === '1' || course === '6' || course === '2') { //Если выпускник или ещё учится
                         if(today.getDate() !== 1) { //Если сегодня не первое число, то на следующий месяц первого
@@ -44,7 +45,6 @@ export const withForm = (Component) => {
                             })
                     }
                 }
-
                 else if (status === 'PreCandidate') {
                     if(course === '0' || course === '6' || course === '1' || course === '2' || course === '3' || course === '4') { //Если выпускник или ещё учится
                         if(today.getDate() !== 1) { //Если сегодня не первое число, то на следующий месяц первого
@@ -59,7 +59,6 @@ export const withForm = (Component) => {
                         }
                     }
                 }
-
                 else if (status === 'Bachelor') {
                     if(course !== '6') {
                         if(today.getMonth() < 8) { //Если он учится в бакалавриате или поступает, то расчитываем ему 1 сен, когда он поступит в магу
@@ -111,8 +110,11 @@ export const withForm = (Component) => {
                 }
             }
 
-            let dissertation = new Date()
-            dissertation = format(getDateOfDissertation(dissertation, 'Master', '1', 15), 'yyyy-MM-dd')
+            const setMinDissertationDate = (status, course) => {
+                this.setState({
+                    minDissertation: format(getDateOfDissertation(new Date(), status, course, 15), 'yyyy-MM-dd'),
+                })
+            }
             let today = new Date()
             let maxRegister = new Date()
             maxRegister = format(maxRegister.setDate(maxRegister.getDate() + 3652), 'yyyy-MM-dd') //10 лет
@@ -123,8 +125,8 @@ export const withForm = (Component) => {
                 academicDegreeCourse: '1', //Курс обучения
                 workExperience: 0, //Стаж работы по должности ППС
                 dateOfBirth: '2000-01-01', //Дата рождения
-                dateOfRegistration: format(new Date(), 'yyyy-MM-dd'), //Дата оформления
-                dateOfDissertationDefense: dissertation, //Дата защиты кандидатской диссертации
+                dateOfRegistration: format(getDateOfRegistration('Master', '1'), 'yyyy-MM-dd'), //Дата оформления
+                dateOfDissertationDefense:  format(getDateOfDissertation(new Date(), 'Master', '1', 15), 'yyyy-MM-dd'), //Дата защиты кандидатской диссертации
             }
             const setAcademicDegree = () => {
                 initialValues.academicDegreeCourse = '1'
@@ -146,6 +148,7 @@ export const withForm = (Component) => {
                     .max(maxRegister, 'Можно указывать максимум на 10 лет вперед')
                     .required('Пожалуйста, введите дату оформления'),
                 dateOfDissertationDefense: Yup.date()
+                    .min(this.state.minDissertation, 'Неверная дата защиты кандидатской')
                     .required('Пожалуйста, введите дату защиты кандидатской диссертации'),
             })
             return (
@@ -155,6 +158,7 @@ export const withForm = (Component) => {
                                setMinRegisterDate={setMinRegisterDate}
                                validationSchema={validationSchema}
                                setAcademicDegree={setAcademicDegree}
+                               setMinDissertationDate={setMinDissertationDate}
                     />
                 </>
             )

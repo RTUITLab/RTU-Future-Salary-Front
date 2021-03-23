@@ -1,6 +1,5 @@
 export const getDateOfRegistration = (status, course) => {
     let today = new Date()
-
     if(status === 'Master') {
         if(course === '1' || course === '2' || course === '6') { //Если ещё учится
             if(today.getDate() !== 1) { //Если сегодня не первое число, то на следующий месяц первого
@@ -28,7 +27,7 @@ export const getDateOfRegistration = (status, course) => {
                 return new Date(today.getFullYear(), today.getMonth(), 1)
             }
         }
-        else { //Если он поступает в аспирантуру, то он окончил спец или магу и может работать со след месяца
+        else if(course === '0') { //Если он поступает в аспирантуру, то он окончил спец или магу и может работать со след месяца
             if (today.getMonth() < 8) {
                 return new Date(today.getFullYear(), 8, 1)
             }
