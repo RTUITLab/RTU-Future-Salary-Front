@@ -19,7 +19,7 @@ const Container = (props) => {
 
         let baseUrl= ''
 
-        let debug = true
+        let debug = false
 
         if(debug) {
             baseUrl = "http://127.0.0.1:8000/"
@@ -47,8 +47,7 @@ const Container = (props) => {
     }
 
     return (
-        <Salary {...props} salary={salary} handleSubmit={handleSubmit}
-        />
+        <Salary {...props} salary={salary} handleSubmit={handleSubmit} />
     )
 
 }

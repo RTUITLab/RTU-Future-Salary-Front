@@ -112,13 +112,16 @@ export const withForm = (Component) => {
 
             const setMinDissertationDate = (status, course) => {
                 this.setState({
-                    minDissertation: format(getDateOfDissertation(new Date(), status, course, 15), 'yyyy-MM-dd'),
+                    minDissertation: format(getDateOfDissertation(new Date(), status, course, 1), 'yyyy-MM-dd'),
                 })
+                console.log(format(getDateOfDissertation(new Date(), status, course, 1), 'yyyy-MM-dd'))
             }
             let today = new Date()
+            today = format(today.setDate(today.getDate() - 6573), 'yyyy-MM-dd') //18 лет
             let maxRegister = new Date()
             maxRegister = format(maxRegister.setDate(maxRegister.getDate() + 3652), 'yyyy-MM-dd') //10 лет
-            today = format(today.setDate(today.getDate() - 6573), 'yyyy-MM-dd') //18 лет
+            let maxDissertation = new Date()
+            maxDissertation = format(maxDissertation.setDate(maxDissertation.getDate() + 4748), 'yyyy-MM-dd') //13 лет
 
             const initialValues = {
                 academicDegree: 'Master', //Статус в момент оформления
@@ -149,6 +152,7 @@ export const withForm = (Component) => {
                     .required('Пожалуйста, введите дату оформления'),
                 dateOfDissertationDefense: Yup.date()
                     .min(this.state.minDissertation, 'Неверная дата защиты кандидатской')
+                    .max(maxDissertation, 'Можно указывать максимум на 13 лет вперед')
                     .required('Пожалуйста, введите дату защиты кандидатской диссертации'),
             })
             return (

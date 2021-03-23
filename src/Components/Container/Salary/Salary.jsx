@@ -4,7 +4,6 @@ import { Formik, Form, Field, ErrorMessage} from 'formik'
 import TextError from "../../../Common/TextError";
 import Graphic from "../Graphic/Graphic";
 import {format} from 'date-fns'
-// import Test from "../../../Common/Test";
 import {getDateOfDissertation} from "../../../Common/getDateOfDissertation";
 import DateInput from "../../../Common/CustomInputs/Date/DateInput";
 import NumberInput from "../../../Common/CustomInputs/Number/NumberInput";
@@ -27,7 +26,7 @@ const Salary = (props) => {
                         <div className={s.form}>
 
                             <div className={s.section}>
-                                <label className={s.label}  htmlFor="academicDegree">Укажите ваш текущий статус</label>
+                                <label className={s.label}  htmlFor="academicDegree">Укажите Ваш текущий статус</label>
                                     <Field
                                         className={`${s.select} ${s.selectStatus}`}
                                         component="select"
@@ -35,15 +34,14 @@ const Salary = (props) => {
                                         name="academicDegree"
                                         multiple={false}
                                         onChange={(e) => {
-                                            let today = new Date()
                                             handleChange(e)
                                             setFieldValue('academicDegreeCourse', '1')
-                                            setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, e.target.value, '1', 15), 'yyyy-MM-dd'))
                                         }}
                                         onBlur={(e) => {
-                                            setFieldValue('dateOfRegistration', format(getDateOfRegistration(e.target.value, values.academicDegreeCourse), 'yyyy-MM-dd'))
                                             props.setMinRegisterDate(e.target.value, values.academicDegreeCourse) //Установка минимального срока оформления
                                             props.setMinDissertationDate(e.target.value, values.academicDegreeCourse) //Установка минимального срока защиты кандидатской
+                                            setFieldValue('dateOfRegistration', format(getDateOfRegistration(e.target.value, values.academicDegreeCourse), 'yyyy-MM-dd'))
+                                            setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(new Date(), e.target.value, '1', 15), 'yyyy-MM-dd'))
                                         }}
                                     >
                                         <option value="Bachelor">Бакалавр</option>
@@ -75,13 +73,12 @@ const Salary = (props) => {
                                         name="academicDegreeCourse"
                                         onChange={(e) => {
                                             handleChange(e)
-                                            let today = new Date()
-                                            setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, values.academicDegree, e.target.value, 15), 'yyyy-MM-dd', ))
                                             setFieldValue('dateOfRegistration', format(getDateOfRegistration(values.academicDegree, e.target.value), 'yyyy-MM-dd'))
-                                        }}
-                                        onBlur={(e) => {
+                                            setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(new Date(), values.academicDegree, e.target.value, 15), 'yyyy-MM-dd', ))
                                             props.setMinRegisterDate(values.academicDegree, e.target.value) //Установка минимального срока оформления
                                             props.setMinDissertationDate(values.academicDegree, e.target.value) //Установка минимального срока защиты кандидатской
+                                        }}
+                                        onBlur={(e) => {
                                         }}
                                     >
 
