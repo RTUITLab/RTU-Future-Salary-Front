@@ -17,31 +17,96 @@ export const withForm = (Component) => {
         render() {
 
             const setMinRegisterDate = (status, course) => {
-                let now = new Date()
-                if (status === 'Master') {
-                    if(course === '6' || course === '1' || course === '2') { //Выпускник или ещё учится
-                        let day = now.getDate()
-                        if(day !== 1) {
+                let today = new Date()
+
+                if(status === 'Master') {
+                    if(course === '1' || course === '6' || course === '2') { //Если выпускник или ещё учится
+                        if(today.getDate() !== 1) { //Если сегодня не первое число, то на следующий месяц первого
                             this.setState({
-                                minRegister: format(new Date(now.getFullYear(), now.getMonth() + 1, 1), 'yyyy-MM-dd')
+                                minRegister: format(new Date(today.getFullYear(), today.getMonth() + 1, 1), 'yyyy-MM-dd')
                             })
                         }
                         else {
                             this.setState({
-                                minRegister: format(new Date(now.getFullYear(), now.getMonth(), 1), 'yyyy-MM-dd')
+                                minRegister: format(new Date(today.getFullYear(), today.getMonth(), 1), 'yyyy-MM-dd')
                             })
                         }
                     }
-                    else {
-                        if(now.getMonth() < 8) {
+                    else if(course === '0') { //Если поступает в магу, то только с 1 сен может оформиться
+                        if (today.getMonth() < 8) {
                             this.setState({
-                                minRegister: format(new Date(now.getFullYear(), 8, 1), 'yyyy-MM-dd')
+                                minRegister: format(new Date(today.getFullYear(), 8, 1), 'yyyy-MM-dd')
                             })
                         }
                         else
                             this.setState({
-                                minRegister: format(new Date(now.getFullYear() + 1, 8, 1), 'yyyy-MM-dd')
+                                minRegister: format(new Date(today.getFullYear() + 1, 8, 1), 'yyyy-MM-dd')
                             })
+                    }
+                }
+
+                else if (status === 'PreCandidate') {
+                    if(course === '0' || course === '6' || course === '1' || course === '2' || course === '3' || course === '4') { //Если выпускник или ещё учится
+                        if(today.getDate() !== 1) { //Если сегодня не первое число, то на следующий месяц первого
+                            this.setState({
+                                minRegister: format(new Date(today.getFullYear(), today.getMonth() + 1, 1), 'yyyy-MM-dd')
+                            })
+                        }
+                        else {
+                            this.setState({
+                                minRegister: format(new Date(today.getFullYear(), today.getMonth(), 1), 'yyyy-MM-dd')
+                            })
+                        }
+                    }
+                }
+
+                else if (status === 'Bachelor') {
+                    if(course !== '6') {
+                        if(today.getMonth() < 8) { //Если он учится в бакалавриате или поступает, то расчитываем ему 1 сен, когда он поступит в магу
+                            this.setState({
+                                minRegister: format(new Date(today.getFullYear() + 4 - Math.floor(course), 8, 1), 'yyyy-MM-dd')
+                            })
+                        }
+                        else
+                            this.setState({
+                                minRegister: format(new Date(today.getFullYear() + 5 - Math.floor(course), 8, 1), 'yyyy-MM-dd')
+                            })
+                    }
+                    else { //Если он выпускник бакалвриата, то расчитываем ему оформление 1 сен след уч года
+                        if(today.getMonth() < 8) {
+                            this.setState({
+                                minRegister: format(new Date(today.getFullYear(), 8, 1), 'yyyy-MM-dd')
+                            })
+                        }
+                        else
+                            this.setState({
+                                minRegister: format(new Date(today.getFullYear() + 1, 8, 1), 'yyyy-MM-dd')
+                            })
+                    }
+                }
+                else if (status === 'Specialist') {
+                    if(course !== '6') {
+                        if(today.getMonth() < 8) { //Если он учится в спец или поступает, то расчитываем ему 1 сен, когда он поступит в аспирантуру
+                            this.setState({
+                                minRegister: format(new Date(today.getFullYear() + 5 - Math.floor(course), 8, 1), 'yyyy-MM-dd')
+                            })
+                        }
+                        else
+                            this.setState({
+                                minRegister: format(new Date(today.getFullYear() + 6 - Math.floor(course), 8, 1), 'yyyy-MM-dd')
+                            })
+                    }
+                    else { //Если он выпускник специалитета, то он может работать с 1 числа след месяца
+                        if(today.getDate() !== 1) { //Если сегодня не первое число, то на следующий месяц первого
+                            this.setState({
+                                minRegister: format(new Date(today.getFullYear(), today.getMonth() + 1, 1), 'yyyy-MM-dd')
+                            })
+                        }
+                        else {
+                            this.setState({
+                                minRegister: format(new Date(today.getFullYear(), today.getMonth(), 1), 'yyyy-MM-dd')
+                            })
+                        }
                     }
                 }
             }

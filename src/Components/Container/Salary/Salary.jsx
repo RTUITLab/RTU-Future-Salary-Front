@@ -42,6 +42,9 @@ const Salary = (props) => {
                                                 setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist_Registration', '1', 1), 'yyyy-MM-dd'))
                                             }
                                             setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, e.target.value, '1', 15), 'yyyy-MM-dd'))
+                                            setFieldValue('dateOfRegistration', format(getDateOfRegistration(e.target.value, values.academicDegreeCourse), 'yyyy-MM-dd'))
+
+                                            props.setMinRegisterDate(e.target.value, values.academicDegreeCourse) //Установка минимального срока оформления
                                         }}
                                     >
                                         <option value="Bachelor">Бакалавр</option>
@@ -79,7 +82,7 @@ const Salary = (props) => {
                                                 setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist_Registration', e.target.value, 1), 'yyyy-MM-dd'))
                                             }
                                             setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, values.academicDegree, e.target.value, 15), 'yyyy-MM-dd', ))
-                                            setFieldValue('dateOfRegistration', format(getDateOfRegistration(values.academicDegree, e.target.value), 'yyyy-MM-dd', ))
+                                            setFieldValue('dateOfRegistration', format(getDateOfRegistration(values.academicDegree, e.target.value), 'yyyy-MM-dd'))
 
                                             props.setMinRegisterDate(values.academicDegree, e.target.value) //Установка минимального срока оформления
                                         }}
