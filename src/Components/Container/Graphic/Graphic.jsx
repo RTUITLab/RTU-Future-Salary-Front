@@ -9,6 +9,7 @@ import {
     // ResponsiveContainer,
     Tooltip,
     XAxis,
+    Label,
     ReferenceDot,
     YAxis,
 } from "recharts";
@@ -60,7 +61,6 @@ const Graphic = (props) => {
                         </defs>
                         <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
                         <XAxis dataKey={`date`}  height={50} tick={<CustomizedAxisTick />} />
-                        {/*<Line type="monotone" name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="#0016FA" />*/}
                         <YAxis />
                         <Tooltip />
                         {/*connectNulls*/}
@@ -68,10 +68,22 @@ const Graphic = (props) => {
                         <Area type="linear" name='Отпускные' dot={{r: 0}} activeDot={{r: 5}} dataKey="vacation_salary" fillOpacity={1} stroke="#f66a69" fill="#f66a69" />
                         }
                         {
+
                             props.salary.filter(s => s.events.length > 0).map(
-                                (s, index) => {
+                                (salary, index) => {
                                     return (
-                                        <ReferenceDot key={s.salary} r={7.5} x={s.date} y={s.salary} strokeWidth={1} stroke={'black'} fill={color[index]}  />
+                                        <ReferenceDot key={index} r={7.5} x={salary.date} y={salary.salary} strokeWidth={1} stroke={'black'} fill={color[index]} >
+                                            <Label
+                                                    content={({ value, viewBox }) => {
+                                                        const { x, y } = viewBox;
+                                                        return (
+                                                            <foreignObject {...viewBox} x={x + 15} y={y - 15} width={70} height={20}>
+                                                                <p className={s.reference}>{salary.salary}</p>
+                                                            </foreignObject>
+                                                        );
+                                                    }}
+                                                />
+                                        </ReferenceDot>
                                     )
                                 }
                             )
