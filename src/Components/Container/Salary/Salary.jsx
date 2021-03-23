@@ -5,10 +5,11 @@ import TextError from "../../../Common/TextError";
 import Graphic from "../Graphic/Graphic";
 import {format} from 'date-fns'
 // import Test from "../../../Common/Test";
-import {getDateOfDissertation} from "../../../Common/getDate";
+import {getDateOfDissertation} from "../../../Common/getDateOfDissertation";
 import DateInput from "../../../Common/CustomInputs/Date/DateInput";
 import NumberInput from "../../../Common/CustomInputs/Number/NumberInput";
 import arrows from './../../../assets/images/arrows.svg'
+import {getDateOfRegistration} from "../../../Common/getDateOfRegistration";
 
 const Salary = (props) => {
 
@@ -26,7 +27,7 @@ const Salary = (props) => {
                         <div className={s.form}>
 
                             <div className={s.section}>
-                                <label className={s.label}  htmlFor="academicDegree">Укажите статус в момент оформления</label>
+                                <label className={s.label}  htmlFor="academicDegree">Укажите ваш текущий статус</label>
                                     <Field
                                         className={`${s.select} ${s.selectStatus}`}
                                         component="select"
@@ -43,6 +44,7 @@ const Salary = (props) => {
                                             setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, e.target.value, '1', 15), 'yyyy-MM-dd'))
                                         }}
                                     >
+                                        <option value="Bachelor">Бакалавр</option>
                                         <option value="Master">Магистр</option>
                                         <option value="PreCandidate">Аспирант</option>
                                         <option value="Specialist">Специалист</option>
@@ -73,20 +75,21 @@ const Salary = (props) => {
                                             let today = new Date()
                                             handleChange(e)
                                             if(values.academicDegree === 'Specialist') {
+                                                //Установка минимальной даты оформления для специалиста, который еще не выпускник
                                                 setFieldValue('dateOfRegistration', format(getDateOfDissertation(today, 'Specialist_Registration', e.target.value, 1), 'yyyy-MM-dd'))
                                             }
                                             setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, values.academicDegree, e.target.value, 15), 'yyyy-MM-dd', ))
+                                            setFieldValue('dateOfRegistration', format(getDateOfRegistration(values.academicDegree, e.target.value), 'yyyy-MM-dd', ))
+
+                                            props.setMinRegisterDate(values.academicDegree, e.target.value) //Установка минимального срока оформления
                                         }}
                                     >
 
-                                        {
-                                            values.academicDegree === 'Master'
-                                            && <option value="0">0</option>
-                                        }
+                                        <option value="0">Поступлю</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         {
-                                            values.academicDegree === 'PreCandidate'
+                                            (values.academicDegree === 'PreCandidate' ||  values.academicDegree === 'Bachelor')
                                             &&
                                                 <>
                                                     <option value="3">3</option>
@@ -102,6 +105,7 @@ const Salary = (props) => {
                                                     <option value="5">5</option>
                                                 </>
                                         }
+                                        <option value="6">Выпускник</option>
                                     </Field>
                                 <label className={s.arrows} htmlFor="academicDegreeCourse"><img src={arrows} alt="arrows"/></label>
 

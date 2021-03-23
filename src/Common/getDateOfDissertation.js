@@ -7,6 +7,13 @@ export const getDateOfDissertation = (today, status, course, day) => {
         else
             return new Date(today.getFullYear() + 7 - Math.floor(course), 8, day)
     }
+    else if (status === 'Bachelor') {
+        if(today.getMonth() < 8) {
+            return new Date(today.getFullYear() + 10 - Math.floor(course), 8, day)
+        }
+        else
+            return new Date(today.getFullYear() + 11 - Math.floor(course), 8, day)
+    }
     else if (status === 'PreCandidate') {
         if(today.getMonth() < 8) {
             return new Date(today.getFullYear() + 4 - Math.floor(course), 8, day)

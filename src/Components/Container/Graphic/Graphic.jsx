@@ -6,7 +6,7 @@ import {
     // Line,
     // LineChart,
     // ReferenceLine,
-    ResponsiveContainer,
+    // ResponsiveContainer,
     Tooltip,
     XAxis,
     ReferenceDot,
