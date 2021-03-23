@@ -2,7 +2,7 @@ export const getDateOfRegistration = (status, course) => {
     let today = new Date()
 
     if(status === 'Master') {
-        if(course === '1' || course === '2') { //Если ещё учится
+        if(course === '1' || course === '2' || course === '6') { //Если ещё учится
             if(today.getDate() !== 1) { //Если сегодня не первое число, то на следующий месяц первого
                 return new Date(today.getFullYear(), today.getMonth() + 1, 1)
             }
@@ -10,7 +10,7 @@ export const getDateOfRegistration = (status, course) => {
                 return new Date(today.getFullYear(), today.getMonth(), 1)
             }
         }
-        else if(course === '6' || course === '0') { //Если выпускник маги, то дату ставим 1 сен, с возможностью оформиться раньше
+        else if(course === '0') { //Если выпускник маги, то дату ставим 1 сен, с возможностью оформиться раньше
             if (today.getMonth() < 8) {
                 return new Date(today.getFullYear(), 8, 1)
             }

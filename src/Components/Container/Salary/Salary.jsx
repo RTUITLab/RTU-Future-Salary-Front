@@ -44,6 +44,8 @@ const Salary = (props) => {
                                             setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, e.target.value, '1', 15), 'yyyy-MM-dd'))
                                             setFieldValue('dateOfRegistration', format(getDateOfRegistration(e.target.value, values.academicDegreeCourse), 'yyyy-MM-dd'))
 
+                                        }}
+                                        onBlur={(e) => {
                                             props.setMinRegisterDate(e.target.value, values.academicDegreeCourse) //Установка минимального срока оформления
                                         }}
                                     >
@@ -84,11 +86,14 @@ const Salary = (props) => {
                                             setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(today, values.academicDegree, e.target.value, 15), 'yyyy-MM-dd', ))
                                             setFieldValue('dateOfRegistration', format(getDateOfRegistration(values.academicDegree, e.target.value), 'yyyy-MM-dd'))
 
+
+                                        }}
+                                        onBlur={(e) => {
                                             props.setMinRegisterDate(values.academicDegree, e.target.value) //Установка минимального срока оформления
                                         }}
                                     >
 
-                                        <option value="0">Поступлю</option>
+                                        <option value="0">Поступаю</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         {

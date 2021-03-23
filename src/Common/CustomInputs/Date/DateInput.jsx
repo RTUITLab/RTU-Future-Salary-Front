@@ -4,14 +4,14 @@ import calendar from './../../../assets/images/calendar-5.svg'
 
 const DateInput = (props) => {
 
-    let disabled
+    let disabled = false
 
-    if (props.id === 'dateOfRegistration' && props.form.values.academicDegree === 'Specialist') {
-        disabled = true
-    }
-    else {
-        disabled = false
-    }
+    // if (props.id === 'dateOfRegistration' && props.form.values.academicDegree === 'Specialist') {
+    //     disabled = true
+    // }
+    // else {
+    //     disabled = false
+    // }
 
     return (
         <span className={s.date}>
