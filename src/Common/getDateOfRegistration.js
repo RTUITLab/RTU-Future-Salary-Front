@@ -1,4 +1,5 @@
 export const getDateOfRegistration = (status, course) => {
+
     let today = new Date()
     if(status === 'Master') {
         if(course === '1' || course === '2' || course === '6') { //Если ещё учится

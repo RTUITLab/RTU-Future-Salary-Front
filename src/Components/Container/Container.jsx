@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import Salary from "./Salary/Salary";
-import {withForm} from "../../hoc/withForm";
 import axios from "axios";
 
 const Container = (props) => {
@@ -32,8 +31,6 @@ const Container = (props) => {
     }
 
     const handleSubmit = async (values) => {
-
-        // console.log(values)
         try {
             let response = await apiRequest(values)
             console.log(response.data)
@@ -43,14 +40,11 @@ const Container = (props) => {
             console.log('Error', error.toJSON())
             window.alert('Error')
         }
-
     }
-
     return (
         <Salary {...props} salary={salary} handleSubmit={handleSubmit} />
     )
 
 }
 
-let withFormContainer = withForm(Container)
-export default withFormContainer
+export default Container

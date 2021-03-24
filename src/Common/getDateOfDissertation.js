@@ -1,5 +1,4 @@
 export const getDateOfDissertation = (today, status, course, day) => {
-
     if(status === 'Master') {
         if(course !== '6') {
             if(today.getMonth() < 8) {
