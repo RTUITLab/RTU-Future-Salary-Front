@@ -1,4 +1,5 @@
 import React from 'react'
+import Draggable from 'react-draggable';
 import {
     Area,
     AreaChart,
@@ -22,7 +23,7 @@ const Graphic = (props) => {
     ]
 
     let salary = getSalary(props.salary)
-
+    let unique = getUniqueEvents(props.salary)
     const CustomizedAxisTick = (props) => {
 
         const { x, y, payload } = props;
@@ -68,18 +69,18 @@ const Graphic = (props) => {
                         <Area type="linear" name='Отпускные' dot={{r: 0}} activeDot={{r: 5}} dataKey="vacation_salary" fillOpacity={1} stroke="#f66a69" fill="#f66a69" />
                         }
                         {
-
-                            props.salary.filter(s => s.events.length > 0).map(
+                            unique.map(
                                 (salary, index) => {
                                     return (
                                         <ReferenceDot key={index} r={7.5} x={salary.date} y={salary.salary} strokeWidth={1} stroke={'black'} fill={color[index]} >
-                                            <Label
-                                                    content={({ value, viewBox }) => {
+                                            <Label content={({ value, viewBox }) => {
                                                         const { x, y } = viewBox;
                                                         return (
-                                                            <foreignObject {...viewBox} x={x + 15} y={y - 15} width={70} height={20}>
-                                                                <p className={s.reference}>{salary.salary}</p>
-                                                            </foreignObject>
+                                                                <Draggable>
+                                                                    <foreignObject {...viewBox} x={x + 15} y={y - 15} width={70} height={20}>
+                                                                            <p className={s.reference}>{salary.salaryLabel}</p>
+                                                                    </foreignObject>
+                                                                </Draggable>
                                                         );
                                                     }}
                                                 />
@@ -120,7 +121,7 @@ const Graphic = (props) => {
 
                                                 <div className={s.marker}>
                                                     <svg  className={s.round}>
-                                                        <circle cx="9" cy="9" fill={color[index]} r={'9'} />
+                                                        <circle cx="8" cy="8" fill={color[index]} r={'9'} />
                                                     </svg>
                                                 </div>
                                                 <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
@@ -134,7 +135,7 @@ const Graphic = (props) => {
                                             </div>
                                         )
                                     }
-                                    else return
+                                    else return ''
                                 }
                             )
 
@@ -157,7 +158,7 @@ const Graphic = (props) => {
 
                                                 <div className={s.marker}>
                                                     <svg  className={s.round}>
-                                                        <circle cx="9" cy="9" fill={color[index]} r={'9'} />
+                                                        <circle cx="8" cy="8" fill={color[index]} r={'9'} />
                                                     </svg>
                                                 </div>
                                                 <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
@@ -171,7 +172,7 @@ const Graphic = (props) => {
                                             </div>
                                         )
                                     }
-                                    else return
+                                    else return ''
                                 }
                             )
 
@@ -201,11 +202,23 @@ export const getSalary = (props) => {
     return salary
 }
 
-export const getEvents = (props) => {
+export const getUniqueEvents = (props) => {
 
-    let event = []
+    let events = props.filter(s => s.events.length > 0)
 
-    event = props.filter(s => s.events.length > 0)
+    events = events.map((event, index, arr) => {
 
-    return event
+        return {
+            ...event,
+            salary: event.salary,
+            salaryLabel: index + 1 !== arr.length ? (event.salary === arr[index+1].salary ? '' : event.salary) : event.salary,
+            date: event.date,
+            vacation_salary: event.vacation_salary,
+            vacation_status: event.vacation_status,
+        }
+    })
+
+    return events
 }
+
+
