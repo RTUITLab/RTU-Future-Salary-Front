@@ -18,7 +18,7 @@ const Container = (props) => {
 
         let baseUrl= ''
 
-        let debug = true
+        let debug = false
 
         if(debug) {
             baseUrl = "http://127.0.0.1:8000/"
