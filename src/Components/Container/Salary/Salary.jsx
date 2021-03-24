@@ -104,17 +104,15 @@ const Salary = (props) => {
             .min('1921-01-01', 'Максимум 100 лет')
             .required('Пожалуйста, введите дату рождения'),
         dateOfRegistration: Yup.date()
-            .min(minRegister, 'Неверная дата оформления')
+            .min(minRegister, 'Невозможная дата оформления')
             .max(maxRegister, 'Можно указывать максимум на 10 лет вперед')
             .required('Пожалуйста, введите дату оформления'),
         dateOfDissertationDefense: Yup.date()
-            .min(minDissertation, 'Неверная дата защиты кандидатской')
+            .min(minDissertation, 'Невозможная дата защиты кандидатской')
             .max(maxDissertation, 'Можно указывать максимум на 13 лет вперед')
             .required('Пожалуйста, введите дату защиты кандидатской диссертации'),
     })
 
-    console.log('minDissertation', minDissertation)
-    // console.log('validationSchema', props.validationSchema)
     return (
         <div className={'outer'}>
             <div className={'container'}>

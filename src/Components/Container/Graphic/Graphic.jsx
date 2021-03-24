@@ -72,13 +72,13 @@ const Graphic = (props) => {
                             unique.map(
                                 (salary, index) => {
                                     return (
-                                        <ReferenceDot key={index} r={7.5} x={salary.date} y={salary.salary} strokeWidth={1} stroke={'black'} fill={color[index]} >
+                                        <ReferenceDot key={index} r={7.5} x={salary.date} y={salary.salary === 0 ? salary.vacation_salary : salary.salary} strokeWidth={1} stroke={'black'} fill={color[index]} >
                                             <Label content={({ value, viewBox }) => {
                                                         const { x, y } = viewBox;
                                                         return (
                                                                 <Draggable>
                                                                     <foreignObject {...viewBox} x={x + 15} y={y - 15} width={70} height={20}>
-                                                                            <p className={s.reference}>{salary.salaryLabel}</p>
+                                                                            <p className={s.reference}>{salary.salaryLabel === 0 ? salary.vacation_salary : salary.salaryLabel}р</p>
                                                                     </foreignObject>
                                                                 </Draggable>
                                                         );
