@@ -149,10 +149,10 @@ const Salary = (props) => {
                                         onBlur={(e) => {
                                         }}
                                     >
-                                        <option value="Bachelor">Бакалавр</option>
-                                        <option value="Master">Магистр</option>
-                                        <option value="PreCandidate">Аспирант</option>
-                                        <option value="Specialist">Специалист</option>
+                                        <option value="Bachelor">Бакалавриат</option>
+                                        <option value="Master">Магистратура</option>
+                                        <option value="PreCandidate">Аспирантура</option>
+                                        <option value="Specialist">Специалитет</option>
                                     </Field>
                                 <label className={s.arrows} htmlFor="academicDegree"><img src={arrows} alt="arrows"/></label>
                             </div>
