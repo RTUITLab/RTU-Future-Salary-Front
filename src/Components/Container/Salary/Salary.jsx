@@ -127,7 +127,7 @@ const Salary = (props) => {
                         <div className={s.form}>
 
                             <div className={s.section}>
-                                <label className={s.label}  htmlFor="academicDegree">Укажите Ваш текущий статус</label>
+                                <label className={s.label}  htmlFor="academicDegree">Укажите Вашу текущую форму обучения</label>
                                     <Field
                                         className={`${s.select} ${s.selectStatus}`}
                                         component="select"

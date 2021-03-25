@@ -78,7 +78,7 @@ const Graphic = (props) => {
                                                         return (
                                                                 <Draggable>
                                                                     <foreignObject {...viewBox} x={x + 15} y={y - 15} width={70} height={20}>
-                                                                            <p className={s.reference}>{salary.salaryLabel === 0 ? salary.vacation_salary : salary.salaryLabel}р</p>
+                                                                            <p className={s.reference}>{salary.salaryLabel === 0 ? `${salary.vacation_salary} ₽` : `${salary.salaryLabel} ₽`}</p>
                                                                     </foreignObject>
                                                                 </Draggable>
                                                         );
@@ -211,7 +211,7 @@ export const getUniqueEvents = (props) => {
         return {
             ...event,
             salary: event.salary,
-            salaryLabel: index + 1 !== arr.length ? (event.salary === arr[index+1].salary ? '' : event.salary) : event.salary,
+            salaryLabel: index + 1 !== arr.length ? (event.salary === arr[index+1].salary ? '' : event.salary.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1 ')) : event.salary.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1 '),
             date: event.date,
             vacation_salary: event.vacation_salary,
             vacation_status: event.vacation_status,
