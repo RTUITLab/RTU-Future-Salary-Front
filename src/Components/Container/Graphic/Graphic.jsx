@@ -70,7 +70,7 @@ const Graphic = (props) => {
                         }
                         {
                             unique.map(
-                                (salary, index) => {
+                                (salary, index, arr) => {
                                     return (
                                         <ReferenceDot key={index} r={7.5} x={salary.date} y={salary.salary === 0 ? salary.vacation_salary : salary.salary} strokeWidth={1} stroke={'black'} fill={color[index]} >
                                             <Label content={({ value, viewBox }) => {
@@ -78,7 +78,7 @@ const Graphic = (props) => {
                                                         return (
                                                                 <Draggable>
                                                                     <foreignObject {...viewBox} x={x + 15} y={y - 15} width={70} height={20}>
-                                                                            <p className={s.reference}>{salary.salaryLabel === 0 ? `${salary.vacation_salary} ₽` : `${salary.salaryLabel} ₽`}</p>
+                                                                            <p className={s.reference}>{salary.salaryLabel === '0' ? (salary.vacation_salary === null ? '' : `${salary.vacation_salaryLabel} ₽`) : `${salary.salaryLabel} ₽`}</p>
                                                                     </foreignObject>
                                                                 </Draggable>
                                                         );
@@ -211,9 +211,10 @@ export const getUniqueEvents = (props) => {
         return {
             ...event,
             salary: event.salary,
-            salaryLabel: index + 1 !== arr.length ? (event.salary === arr[index+1].salary ? '' : event.salary.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1 ')) : event.salary.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1 '),
+            salaryLabel: index + 1 !== arr.length ? (event.salary === arr[index+1].salary ? '0' : event.salary.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1 ')) : event.salary.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1 '),
             date: event.date,
             vacation_salary: event.vacation_salary,
+            vacation_salaryLabel: event.vacation_salary !== null ? event.vacation_salary.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1 ') : null,
             vacation_status: event.vacation_status,
         }
     })
