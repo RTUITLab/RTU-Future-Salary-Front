@@ -166,7 +166,16 @@ const Salary = (props) => {
                                     component={DateInput}
                                     disabled={values.academicDegree === 'Specialist'}
                                 />
-                                <ErrorMessage name="dateOfRegistration" component={TextError} />
+                                <ErrorMessage name="dateOfRegistration" render={
+                                    err => {
+                                        return (
+                                            <>
+                                                <TextError children={err} />
+                                                <button onClick={() => setFieldValue('dateOfRegistration', format(getDateOfRegistration(values.academicDegree, values.academicDegreeCourse), 'yyyy-MM-dd') )}>Вернуть</button>
+                                            </>
+                                        )
+                                    }
+                                } />
                             </div>
 
                             <div className={s.section}>
@@ -249,7 +258,17 @@ const Salary = (props) => {
                                     name="dateOfDissertationDefense"
                                     component={DateInput}
                                 />
-                                <ErrorMessage name="dateOfDissertationDefense" component={TextError} />
+                                {/*<ErrorMessage name="dateOfDissertationDefense" component={TextError} />*/}
+                                <ErrorMessage name="dateOfDissertationDefense" render={
+                                    err => {
+                                        return (
+                                            <>
+                                                <TextError children={err} />
+                                                <button onClick={() => setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(new Date(), values.academicDegree, values.academicDegreeCourse, 15), 'yyyy-MM-dd') )}>Вернуть</button>
+                                            </>
+                                        )
+                                    }
+                                } />
                             </div>
                         </div>
 
