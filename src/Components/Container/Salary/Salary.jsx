@@ -169,10 +169,10 @@ const Salary = (props) => {
                                 <ErrorMessage name="dateOfRegistration" render={
                                     err => {
                                         return (
-                                            <>
+                                            <div className={s.error}>
                                                 <TextError children={err} />
-                                                <button onClick={() => setFieldValue('dateOfRegistration', format(getDateOfRegistration(values.academicDegree, values.academicDegreeCourse), 'yyyy-MM-dd') )}>Вернуть</button>
-                                            </>
+                                                <button className={s.defaultBtn} onClick={() => setFieldValue('dateOfRegistration', format(getDateOfRegistration(values.academicDegree, values.academicDegreeCourse), 'yyyy-MM-dd') )}>Вернуть по умолчанию</button>
+                                            </div>
                                         )
                                     }
                                 } />
@@ -234,7 +234,16 @@ const Salary = (props) => {
                                     name="dateOfBirth"
                                     component={DateInput}
                                 />
-                                <ErrorMessage name="dateOfBirth" component={TextError} />
+                                <ErrorMessage name="dateOfBirth" render={
+                                    err => {
+                                        return (
+                                            <div className={s.error}>
+                                                <TextError children={err} />
+                                                <button className={s.defaultBtn} onClick={() => setFieldValue('dateOfBirth', format(new Date(2000, 0, 1), 'yyyy-MM-dd') )}>Вернуть по умолчанию</button>
+                                            </div>
+                                        )
+                                    }
+                                } />
                             </div>
 
 
@@ -262,10 +271,10 @@ const Salary = (props) => {
                                 <ErrorMessage name="dateOfDissertationDefense" render={
                                     err => {
                                         return (
-                                            <>
+                                            <div className={s.error}>
                                                 <TextError children={err} />
-                                                <button onClick={() => setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(new Date(), values.academicDegree, values.academicDegreeCourse, 15), 'yyyy-MM-dd') )}>Вернуть</button>
-                                            </>
+                                                <button className={s.defaultBtn} onClick={() => setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(new Date(), values.academicDegree, values.academicDegreeCourse, 15), 'yyyy-MM-dd') )}>Вернуть по умолчанию</button>
+                                            </div>
                                         )
                                     }
                                 } />

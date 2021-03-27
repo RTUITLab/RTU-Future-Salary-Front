@@ -1,8 +1,9 @@
 .form__error {
     color: red;
-    position: absolute;
     font-size: 12px;
-    bottom: -12px
+    align-items: center;
+    display: flex;
+    margin-right: 36px;
 }
 
 .outer {

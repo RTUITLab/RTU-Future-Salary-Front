@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 30px;
-    grid-row-gap: 15px;
+    grid-row-gap: 24px;
     margin-bottom: 30px;
     //max-width: 920px;
 }
@@ -133,4 +133,25 @@
 
 .submitBtn:disabled {
     background-color: #4E9BDA;
+}
+
+.error {
+    display: flex;
+    width: 384px;
+    justify-content: flex-end;
+    align-content: center;
+    position: absolute;
+    bottom: -18px;
+}
+
+.defaultBtn {
+    display: block;
+    outline: none;
+    font-size: 10px;
+    background-color: transparent;
+    border: none;
+    color: black;
+    text-decoration: underline;
+    border-radius: 10px;
+    cursor: pointer;
 }
