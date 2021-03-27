@@ -113,10 +113,12 @@ const Salary = (props) => {
             .required('Пожалуйста, введите дату защиты кандидатской диссертации'),
     })
 
+    let date = format(new Date(), 'dd-MM-yyyy')
+
     return (
         <div className={'outer'}>
             <div className={'container'}>
-                <h1 className={s.title}>Калькулятор гарантированных выплат ППС</h1>
+                <h1 className={s.title}>Калькулятор гарантированных выплат ППС <span>(текущая дата: {format(new Date(), 'dd-MM-yyyy')})</span></h1>
                 <Formik initialValues={props.initialValues}
                         validationSchema={validationSchema}
                         onSubmit={props.handleSubmit}

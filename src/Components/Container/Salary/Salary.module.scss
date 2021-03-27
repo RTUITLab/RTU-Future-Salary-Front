@@ -4,7 +4,6 @@
     grid-column-gap: 30px;
     grid-row-gap: 24px;
     margin-bottom: 30px;
-    //max-width: 920px;
 }
 
 .title {
@@ -23,11 +22,12 @@
     width: 8px;
     top: calc(-.1 * 1em);
     vertical-align: middle;
-    //bottom: 0;
     height: 30px;
     background-color: #e5e5e5;
     margin-right: calc(5px + .2em);
-    //border-left: 6px solid #e5e5e5;
+}
+.title span {
+    color: #888;
 }
 
 .subtitle {
@@ -53,7 +53,7 @@
     grid-column-gap: 13px;
     align-items: center;
     display: grid;
-    grid-template-columns: 248px max-content;
+    grid-template-columns: 250px max-content;
 }
 
 .selectStatus {
