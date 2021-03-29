@@ -266,3 +266,13 @@
         margin-right: 0;
     }
 }
+
+@media print{
+    .form {
+        display: grid;
+        grid-template-areas:
+        "status register"
+        "course birthday"
+        "experience dissertation";
+    }
+}

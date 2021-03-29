@@ -19,18 +19,27 @@
     padding-bottom: 30px;
 }
 
+//@media print {
+//    .recharts-wrapper,
+//    .recharts-surface{
+//        width: calc(100%)!important;
+//    }
+//}
+
 @media (max-width: 1200px) {
     .container {
         padding: 0 10px 30px;
     }
     .recharts-wrapper,
     .recharts-responsive-container,
+    .recharts-cartesian-grid,
     .recharts-surface {
         width: 99vw !important;
     }
 }
 
 @media (max-width: 882px) {
+    .recharts-cartesian-grid,
     .recharts-wrapper,
     .recharts-responsive-container,
     .recharts-surface {
@@ -39,6 +48,7 @@
 }
 
 @media (max-width: 650px) {
+    .recharts-cartesian-grid,
     .recharts-wrapper,
     .recharts-responsive-container,
     .recharts-surface {
@@ -51,6 +61,7 @@
 }
 
 @media (max-width: 480px) {
+    .recharts-cartesian-grid,
     .recharts-wrapper,
     .recharts-responsive-container,
     .recharts-surface {
@@ -59,12 +70,13 @@
     }
 }
 
-.recharts-wrapper,
-.recharts-responsive-container,
-.recharts-surface {
-    @media print {
+@media print {
+    .recharts-cartesian-grid,
+    .recharts-wrapper,
+    .recharts-responsive-container,
+    .recharts-surface {
         width: 1000px !important;
-        height: 500px !important;
+        height: 400px !important;
     }
 }
 

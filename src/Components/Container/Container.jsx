@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import Salary from "./Salary/Salary";
 import axios from "axios";
+import {isMobile, isTablet} from 'react-device-detect';
+
 
 const Container = (props) => {
 
@@ -8,7 +10,6 @@ const Container = (props) => {
 
     const apiRequest = (values) => {
         let formdata = new FormData();
-
         formdata.append('academic_status', values.academicDegree)
         formdata.append('academic_course', values.academicDegreeCourse)
         formdata.append('work_experience', values.workExperience)
@@ -42,7 +43,7 @@ const Container = (props) => {
         }
     }
     return (
-        <Salary {...props} salary={salary} handleSubmit={handleSubmit} />
+        <Salary isMobile={isMobile} isTablet={isTablet} {...props} salary={salary} handleSubmit={handleSubmit} />
     )
 
 }

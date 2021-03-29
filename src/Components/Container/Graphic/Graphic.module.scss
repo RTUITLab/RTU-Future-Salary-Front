@@ -1,15 +1,39 @@
 .gr {
-    //max-width: 1200px !important;
+    max-width: 1200px !important;
+
     //width: 100vw !important;
     //width: 100%;
-    //width: 900px !important;
+    //width: calc(1200px - 20px) !important;
+    //width: calc(100vw - 20px) !important;
+    //width: 1200px !important;
     //height: 500px !important;
 }
+
+@media print {
+    .gr {
+        //width: 1090pt !important;
+        height: 400pt !important;
+    }
+}
+
+//@media (max-width: 538px) {
+//    .gr {
+//        width: 1200px !important;
+//    }
+//}
+
+//@media (max-width: 537px) {
+//    .gr {
+//        width: calc(100vw - 20px) !important;
+//        //width: 1200px !important;
+//        //width: 100% !important;
+//    }
+//}
 
 .gr {
     @media print {
         display: block !important;
-        width: 900px !important;
+        width: 1200px !important;
         max-height: 500px !important;
     }
 }
@@ -117,6 +141,8 @@
 }
 
 .date {
+    padding-left: 0;
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -147,21 +173,53 @@
     //margin-left: 10px;
 }
 
-//@media (max-width: 1000px) {
-//    .gr {
-//        width: 100vw !important;
-//    }
-//}
-//
-//.gr {
-//    @media print {
-//        width: 100vw !important;
-//    }
-//}
+.soloTable {
+    display: none;
+}
 
+@media (max-width: 800px) {
+    .tableContainer {
+        display: none;
+    }
+    .soloTable {
+        display: block;
+    }
+    .reference {
+        font-size: 16px;
+    }
+}
+@media (max-width: 650px) {
+    .title {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .vacation {
+        margin: 30px 0;
+    }
+}
+@media (max-width: 480px) {
+    .vacation, .tableTitle {
+        font-size: 12px;
+    }
+    .reference {
+        font-size: 20px;
+    }
+    .event {
+        padding-right: 5px;
+    }
+    .marker {
+        min-width: 55px;
+    }
+    .event li, .td {
+        font-size: 10px;
+    }
+}
 
-//.graphicContainer {
-//    @media print {
-//        width: 100vw !important;
-//    }
-//}
+@media print {
+    .tableContainer {
+        display: grid;
+    }
+    .soloTable {
+        display: none;
+    }
+}

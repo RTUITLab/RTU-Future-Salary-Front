@@ -288,7 +288,7 @@ const Salary = (props) => {
                 </Formik>
                 {
                     props.salary.length > 0 &&
-                    <Graphic salary={props.salary}/>
+                    <Graphic isMobile={props.isMobile} isTablet={props.isTablet} salary={props.salary}/>
                 }
             </div>
         </div>

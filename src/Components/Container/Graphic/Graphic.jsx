@@ -15,6 +15,7 @@ import {
     YAxis,
 } from "recharts";
 import s from './Graphic.module.scss'
+import cl from 'classnames'
 
 const Graphic = (props) => {
 
@@ -49,7 +50,6 @@ const Graphic = (props) => {
                                }}
                                width={1200}
                                height={500}
-                               // maxWidth={1200}
                                type="monotone"
                                data={salary}
                                className={s.gr}
@@ -63,7 +63,10 @@ const Graphic = (props) => {
                         <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
                         <XAxis dataKey={`date`}  height={50} tick={<CustomizedAxisTick />} />
                         <YAxis />
-                        <Tooltip />
+                        {
+                            (!props.isMobile && !props.isTablet && window.innerWidth > 1200) &&
+                            <Tooltip />
+                        }
                         {/*connectNulls*/}
                         <Area type="linear" name='Зарплата' dot={{r: 0}} activeDot={{r: 5}} dataKey="salary" stroke="#0016FA" fill="url(#colorUv)" />
                         <Area type="linear" name='Отпускные' dot={{r: 0}} activeDot={{r: 5}} dataKey="vacation_salary" fillOpacity={1} stroke="#f66a69" fill="#f66a69" />
@@ -77,7 +80,7 @@ const Graphic = (props) => {
                                                         const { x, y } = viewBox;
                                                         return (
                                                                 <Draggable>
-                                                                    <foreignObject {...viewBox} x={x + 15} y={y - 15} width={70} height={20}>
+                                                                    <foreignObject {...viewBox} x={x + 15} y={y - 20} width={100} height={20}>
                                                                             <p className={s.reference}>{salary.salaryLabel === '0' ? (salary.vacation_salary === null ? '' : `${salary.vacation_salaryLabel} ₽`) : `${salary.salaryLabel} ₽`}</p>
                                                                     </foreignObject>
                                                                 </Draggable>
@@ -124,7 +127,7 @@ const Graphic = (props) => {
                                                         <circle cx="8" cy="8" fill={color[index]} r={'9'} />
                                                     </svg>
                                                 </div>
-                                                <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
+                                                <div className={`${s.td} ${s.date}`}><span>{salary.date.replace(/^\s+/g, '')}</span></div>
                                                 <ul className={`${s.td} ${s.event}`}>
                                                     {salary.events.map((e, index) => {
 
@@ -145,7 +148,7 @@ const Graphic = (props) => {
                     <div className={s.table}>
                         <div className={s.legendItem}>
                             <div className={`${s.marker} ${s.tableTitle}`}>Маркер</div>
-                            <div className={`${s.date} ${s.tableTitle}`}>Дата</div>
+                            <div className={`${s.tableTitle} ${s.date}`}>Дата</div>
                             <div className={`${s.event} ${s.tableTitle}`}>События</div>
                         </div>
                         {
@@ -161,7 +164,7 @@ const Graphic = (props) => {
                                                         <circle cx="8" cy="8" fill={color[index]} r={'9'} />
                                                     </svg>
                                                 </div>
-                                                <div className={`${s.td} ${s.date}`}>{salary.date}&ensp;</div>
+                                                <div className={`${s.td} ${s.date}`}><span>{salary.date.replace(/^\s+/g, '')}</span></div>
                                                 <ul className={`${s.td} ${s.event}`}>
                                                     {salary.events.map((e, index) => {
 
@@ -179,6 +182,44 @@ const Graphic = (props) => {
                         }
                     </div>
                 </div>
+
+                <div className={s.soloTable}>
+                    <div className={s.table}>
+                        <div className={s.legendItem}>
+                            <div className={`${s.marker} ${s.tableTitle}`}>Маркер</div>
+                            <div className={`${s.date} ${s.tableTitle}`}>Дата</div>
+                            <div className={`${s.event} ${s.tableTitle}`}>События</div>
+                        </div>
+                        {
+                            props.salary.filter(events => events.events.length > 0).map(
+                                (salary, index) => {
+                                    return (
+                                        <div className={s.legendItem} key={color[index]}>
+
+                                            <div className={s.marker}>
+                                                <svg  className={s.round}>
+                                                    <circle cx="8" cy="8" fill={color[index]} r={'9'} />
+                                                </svg>
+                                            </div>
+                                            <div className={`${s.td} ${s.date}`}><span>{salary.date.replace(/^\s+/g, '')}</span></div>
+                                            <ul className={`${s.td} ${s.event}`}>
+                                                {salary.events.map((e, index) => {
+
+                                                    if(index < salary.events.length - 1) return <li className={s.eventItem} key={index}>{e}</li>
+                                                    else return <li key={index}>{e}</li>
+                                                })}
+                                            </ul>
+                                        </div>
+                                    )
+
+
+                                }
+                            )
+
+                        }
+                    </div>
+                </div>
+
             </div>
         </>
     )
