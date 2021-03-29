@@ -7,6 +7,7 @@ import {isMobile, isTablet} from 'react-device-detect';
 const Container = (props) => {
 
     const [salary, setSalary] = useState('')
+    const [isFetch, toggleIsFetching] = useState(false)
 
     const apiRequest = (values) => {
         let formdata = new FormData();
@@ -32,18 +33,21 @@ const Container = (props) => {
     }
 
     const handleSubmit = async (values) => {
+        toggleIsFetching(true)
         try {
             let response = await apiRequest(values)
             console.log(response.data)
             setSalary(response.data)
+            toggleIsFetching(false)
         }
         catch (error) {
             console.log('Error', error.toJSON())
             window.alert('Error')
+            toggleIsFetching(false)
         }
     }
     return (
-        <Salary isMobile={isMobile} isTablet={isTablet} {...props} salary={salary} handleSubmit={handleSubmit} />
+        <Salary isFetch={isFetch} isMobile={isMobile} isTablet={isTablet} {...props} salary={salary} handleSubmit={handleSubmit} />
     )
 
 }

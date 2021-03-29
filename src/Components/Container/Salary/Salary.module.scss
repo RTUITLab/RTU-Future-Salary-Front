@@ -119,6 +119,7 @@
 }
 
 .submitBtn {
+    position: relative;
     cursor: pointer;
     outline: none;
     font-size: 14px;
@@ -185,6 +186,18 @@
     grid-area: dissertation;
 }
 
+.toggle {
+    position: absolute;
+    margin: auto;
+    right: -25px;
+    width: 20px;
+}
+
+.toggle img {
+    width: 20px;
+    display: block;
+}
+
 @media (max-width: 830px) {
     .form {
        grid-template-areas:
@@ -226,7 +239,7 @@
     }
     .submitBtn {
         display: block;
-        margin: 40px auto 10px;
+        margin: 30px auto 20px;
     }
     .error {
         justify-content: flex-start;

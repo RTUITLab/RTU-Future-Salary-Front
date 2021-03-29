@@ -11,6 +11,7 @@ import arrows from './../../../assets/images/arrows.svg'
 import {getDateOfRegistration} from "../../../Common/getDateOfRegistration";
 import * as Yup from "yup";
 import cl from 'classnames'
+import preloader from './../../../assets/images/loader.svg'
 
 const Salary = (props) => {
 
@@ -282,7 +283,12 @@ const Salary = (props) => {
                             </div>
                         </div>
 
-                        <button className={s.submitBtn} type="submit" disabled={isSubmitting}>Рассчитать</button>
+                        <button className={s.submitBtn} type="submit" disabled={isSubmitting}>Рассчитать
+                            {
+                                props.isFetch &&
+                                <span className={s.toggle}><img src={preloader} alt="preloader"/></span>
+                            }
+                        </button>
                     </Form>
                     )}
                 </Formik>
