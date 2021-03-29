@@ -1,5 +1,4 @@
 import React from "react";
-// import * as Yup from "yup";
 import {format} from 'date-fns'
 import {getDateOfDissertation} from "../../Common/getDateOfDissertation";
 import {getDateOfRegistration} from "../../Common/getDateOfRegistration";
@@ -18,11 +17,7 @@ const StateForm = (props) => {
         return (
             <>
                 <Container {...props}
-                           // minDissertation={minDissertation}
                            initialValues={initialValues}
-                           // setMinRegisterDate={setMinRegisterDate}
-                           // validationSchema={validationSchema}
-                           // setMinDissertationDate={setMinDissertationDate}
                 />
             </>
         )

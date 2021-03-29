@@ -3,7 +3,6 @@ import Salary from "./Salary/Salary";
 import axios from "axios";
 import {isMobile, isTablet} from 'react-device-detect';
 
-
 const Container = (props) => {
 
     const [salary, setSalary] = useState('')
@@ -36,13 +35,12 @@ const Container = (props) => {
         toggleIsFetching(true)
         try {
             let response = await apiRequest(values)
-            console.log(response.data)
             setSalary(response.data)
             toggleIsFetching(false)
         }
         catch (error) {
-            console.log('Error', error.toJSON())
-            window.alert('Error')
+            // console.log('Error', error.toJSON())
+            window.alert('Что-то пошло не так :/')
             toggleIsFetching(false)
         }
     }
