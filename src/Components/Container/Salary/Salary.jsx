@@ -10,6 +10,7 @@ import NumberInput from "../../../Common/CustomInputs/Number/NumberInput";
 import arrows from './../../../assets/images/arrows.svg'
 import {getDateOfRegistration} from "../../../Common/getDateOfRegistration";
 import * as Yup from "yup";
+import cl from 'classnames'
 
 const Salary = (props) => {
 
@@ -113,8 +114,6 @@ const Salary = (props) => {
             .required('Пожалуйста, введите дату защиты кандидатской диссертации'),
     })
 
-    let date = format(new Date(), 'dd-MM-yyyy')
-
     return (
         <div className={'outer'}>
             <div className={'container'}>
@@ -128,7 +127,7 @@ const Salary = (props) => {
                     (<Form>
                         <div className={s.form}>
 
-                            <div className={s.section}>
+                            <div className={cl(s.section, s.status)}>
                                 <label className={s.label}  htmlFor="academicDegree">Укажите Ваш текущий уровень обучения</label>
                                     <Field
                                         className={`${s.select} ${s.selectStatus}`}
@@ -159,7 +158,7 @@ const Salary = (props) => {
                                 <label className={s.arrows} htmlFor="academicDegree"><img src={arrows} alt="arrows"/></label>
                             </div>
 
-                            <div className={s.section}>
+                            <div className={cl(s.section, s.register)}>
                                 <label className={`${s.label} ${s.labelRight}`}  htmlFor="dateOfRegistration">Укажите дату оформления договора</label>
                                 <Field
                                     id="dateOfRegistration"
@@ -180,7 +179,7 @@ const Salary = (props) => {
                                 } />
                             </div>
 
-                            <div className={s.section}>
+                            <div className={cl(s.section, s.course)}>
                                 <label className={s.label}  htmlFor="academicDegreeCourse">Укажите Ваш текущий учебный курс </label>
                                     <Field
                                         className={`${s.select} ${s.selectCourse}`}
@@ -228,7 +227,7 @@ const Salary = (props) => {
 
                             </div>
 
-                            <div className={s.section}>
+                            <div className={cl(s.section, s.birthday)}>
                                 <label className={`${s.label} ${s.labelRight}`}  htmlFor="dateOfBirth">Укажите Вашу дату рождения</label>
                                 <Field
                                     id="dateOfBirth"
@@ -249,7 +248,7 @@ const Salary = (props) => {
                             </div>
 
 
-                            <div className={s.section}>
+                            <div className={cl(s.section, s.experience)}>
                                 <label className={s.label}  htmlFor="workExperience">Опыт работы по должности ППС (мес)</label>
                                 <Field
                                     id="workExperience"
@@ -261,7 +260,7 @@ const Salary = (props) => {
                                 <ErrorMessage name="workExperience" component={TextError} />
                             </div>
 
-                            <div className={s.section}>
+                            <div className={cl(s.section, s.dissertation)}>
                                 <label className={`${s.label} ${s.labelRight}`} htmlFor="dateOfDissertationDefense">Дата защиты кандидатской диссертации </label>
                                 <Field
                                     id="dateOfDissertationDefense"

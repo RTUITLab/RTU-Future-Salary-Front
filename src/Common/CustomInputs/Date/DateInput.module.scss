@@ -49,3 +49,14 @@
     bottom: 0;
     margin: auto;
 }
+
+@media (max-width: 380px) {
+    .date {
+        width: 123px;
+    }
+    .calendar {
+        right: 11px;
+        //left: 0;
+        //right: 0;
+    }
+}
