@@ -285,7 +285,7 @@ const Salary = (props) => {
 
                         <button className={s.submitBtn} type="submit" disabled={isSubmitting}>Рассчитать
                             {
-                                props.isFetch &&
+                                isSubmitting &&
                                 <span className={s.toggle}><img src={preloader} alt="preloader"/></span>
                             }
                         </button>
