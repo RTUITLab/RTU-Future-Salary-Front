@@ -104,15 +104,15 @@ const Salary = (props) => {
         dateOfBirth: Yup.date()
             .max(today, 'Вам должно быть минимум 18 лет')
             .min('1921-01-01', 'Максимум 100 лет')
-            .required('Пожалуйста, введите дату рождения'),
+            .required('Введите дату рождения'),
         dateOfRegistration: Yup.date()
             .min(minRegister, 'Невозможная дата оформления')
             .max(maxRegister, 'Можно указывать максимум на 10 лет вперед')
-            .required('Пожалуйста, введите дату оформления'),
+            .required('Введите дату оформления'),
         dateOfDissertationDefense: Yup.date()
             .min(minDissertation, 'Невозможная дата защиты кандидатской')
             .max(maxDissertation, 'Можно указывать максимум на 13 лет вперед')
-            .required('Пожалуйста, введите дату защиты кандидатской диссертации'),
+            .required('Введите дату защиты диссертации'),
     })
 
     return (
