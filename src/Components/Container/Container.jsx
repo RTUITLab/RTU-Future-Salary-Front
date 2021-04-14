@@ -16,18 +16,13 @@ const Container = (props) => {
         formdata.append('date_of_registration', values.dateOfRegistration)
         formdata.append('date_of_dissertation', values.dateOfDissertationDefense)
 
-        let baseUrl= ''
-
-        let debug = false
-
-        if(debug) {
-            baseUrl = "http://127.0.0.1:8000/"
+        let baseUrl = process.env.REACT_APP_PRODUCTION_URL
+        if(baseUrl === undefined) {
+            window.alert('Не удалось получить доступ к переменной окружения REACT_APP_PRODUCTION_URL')
         }
         else {
-            baseUrl = process.env.REACT_APP_PRODUCTION_URL
+            return axios.post(`${baseUrl}api/calculate`, formdata)
         }
-
-        return axios.post(`${baseUrl}api/calculate`, formdata)
     }
 
     const handleSubmit = async (values) => {
@@ -37,7 +32,7 @@ const Container = (props) => {
         }
         catch (error) {
             // console.log('Error', error.toJSON())
-            window.alert('Что-то пошло не так :/')
+            window.alert('Ошибка получения графика выплат')
         }
     }
     return (
