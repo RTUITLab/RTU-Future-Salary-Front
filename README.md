@@ -1,6 +1,6 @@
-# Getting Started
+# SALARY-PROJECT
 
-This project was made by Dev.gang.
+💸 Salary is a web service that allows you to calculate guaranteed payments to faculty members at RTU MIREA
 
 
 ## Installation and layout
@@ -23,21 +23,14 @@ Install the packages required for the project
 
 ### `npm install`
 
-Finally start the project
-
-### Change `Container.jsx`
-
-Open `<Folder_name>/src/Components/Container.jsx` and change const `debug` on `line 22` how you need
-```
-debug = true for localhost
-debug = false for prod.
-```
 
 ### Create `.env` file in the directory named `Folder_name` and add your secret data to it
 
 ```
-REACT_APP_PRODUCTION_URL = <your prod. domain name/>
+REACT_APP_PRODUCTION_URL = <your domain name/>
 ```
+
+Finally start the project
 
 ### `npm start`
 
@@ -47,3 +40,5 @@ Now wait, our project will open soon in the browser on the http://localhost:3000
 
 1. Open console in `<Folder_name>`
 2. `npm run build` builds the app for production to the build folder.
+
+This project was made by RealityGang - team of RTU IT Lab.
