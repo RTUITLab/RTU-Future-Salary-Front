@@ -3,3 +3,4 @@ USER root
 WORKDIR /frontend
 COPY . /frontend
 RUN npm install
+RUN npm rebuild node-sass
