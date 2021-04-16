@@ -1,12 +1,5 @@
 .gr {
     max-width: 1200px !important;
-
-    //width: 100vw !important;
-    //width: 100%;
-    //width: calc(1200px - 20px) !important;
-    //width: calc(100vw - 20px) !important;
-    //width: 1200px !important;
-    //height: 500px !important;
 }
 
 @media print {
@@ -15,20 +8,6 @@
         height: 400pt !important;
     }
 }
-
-//@media (max-width: 538px) {
-//    .gr {
-//        width: 1200px !important;
-//    }
-//}
-
-//@media (max-width: 537px) {
-//    .gr {
-//        width: calc(100vw - 20px) !important;
-//        //width: 1200px !important;
-//        //width: 100% !important;
-//    }
-//}
 
 .gr {
     @media print {
@@ -53,8 +32,7 @@
 }
 
 .graphicContainer {
-    //display: flex;
-    //width: 1200px
+
 }
 
 .information {
@@ -170,7 +148,7 @@
 }
 
 .event li::marker {
-    //margin-left: 10px;
+
 }
 
 .soloTable {
