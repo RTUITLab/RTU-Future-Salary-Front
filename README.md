@@ -13,7 +13,7 @@ Update npm
 
 clone this repository
 
-### `git clone https://github.com/Zayac11/Salary <Folder_name>`
+### `git clone https://github.com/RTUITLab/RTU-Future-Salary-Front <Folder_name>`
 
 Open a console in a folder and go to the cloned repository
 
