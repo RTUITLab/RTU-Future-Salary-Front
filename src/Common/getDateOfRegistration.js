@@ -72,10 +72,10 @@ export const getDateOfRegistration = (status, course) => {
             }
         }
     }
-    if (data.getMonth() === 6) {
+    if (data.getMonth() === 6 && status === 'Master' && course !== '6') {
         data = new Date(data.getFullYear(), data.getMonth() + 2, 1)
     }
-    else if (data.getMonth() === 7) {
+    else if (data.getMonth() === 7 && status === 'Master' && course !== '6') {
         data = new Date(data.getFullYear(), data.getMonth() + 1, 1)
     }
 

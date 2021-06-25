@@ -167,14 +167,7 @@ const Salary = (props) => {
                                     name="dateOfRegistration"
                                     disabled={values.academicDegree === 'Specialist'}
                                     component={DateInput}
-
-                                    // render={({ field /* { name, value, onChange, onBlur } */ }) => {
-                                    //     debugger
-                                    // }}
-
-
                                 >
-                                    {/*<DateInput id={"dateOfRegistration"} />*/}
                                 </Field>
                                 <ErrorMessage name="dateOfRegistration" render={
                                     err => {
