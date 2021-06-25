@@ -28,7 +28,12 @@ const Container = (props) => {
     const handleSubmit = async (values) => {
         try {
             let response = await apiRequest(values)
-            setSalary(response.data)
+            if(response.status === 200 && !response.data.status) {
+                setSalary(response.data)
+            }
+            else {
+                throw new Error()
+            }
         }
         catch (error) {
             // console.log('Error', error.toJSON())

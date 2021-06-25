@@ -15,7 +15,6 @@ import {
     YAxis,
 } from "recharts";
 import s from './Graphic.module.scss'
-import cl from 'classnames'
 
 const Graphic = (props) => {
 

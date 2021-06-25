@@ -130,32 +130,32 @@ const Salary = (props) => {
 
                             <div className={cl(s.section, s.status)}>
                                 <label className={s.label}  htmlFor="academicDegree">Укажите Ваш текущий уровень обучения</label>
-                                    <Field
-                                        className={`${s.select} ${s.selectStatus}`}
-                                        component="select"
-                                        id="academicDegree"
-                                        name="academicDegree"
+                                <Field
+                                    className={`${s.select} ${s.selectStatus}`}
+                                    component="select"
+                                    id="academicDegree"
+                                    name="academicDegree"
 
-                                        onChange={(e) => {
-                                            setFieldValue('academicDegreeCourse', '1')
-                                            setMinRegisterDate(e.target.value, '1') //Установка минимального срока оформления
-                                            setMinDissertationDate(e.target.value, '1') //Установка минимального срока защиты кандидатской
-                                            handleChange(e)
-                                            setTimeout(() => {
-                                                setFieldError('dateOfRegistration', '')
-                                                setFieldError('dateOfDissertationDefense', '')
-                                                setFieldValue('dateOfRegistration', format(getDateOfRegistration(e.target.value, '1'), 'yyyy-MM-dd'))
-                                                setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(new Date(), e.target.value, '1', 15), 'yyyy-MM-dd'))
-                                            }, 50);
-                                        }}
-                                        onBlur={(e) => {
-                                        }}
-                                    >
-                                        <option value="Bachelor">Бакалавриат</option>
-                                        <option value="Master">Магистратура</option>
-                                        <option value="PreCandidate">Аспирантура</option>
-                                        <option value="Specialist">Специалитет</option>
-                                    </Field>
+                                    onChange={(e) => {
+                                        setFieldValue('academicDegreeCourse', '1')
+                                        setMinRegisterDate(e.target.value, '1') //Установка минимального срока оформления
+                                        setMinDissertationDate(e.target.value, '1') //Установка минимального срока защиты кандидатской
+                                        handleChange(e)
+                                        setTimeout(() => {
+                                            setFieldError('dateOfRegistration', '')
+                                            setFieldError('dateOfDissertationDefense', '')
+                                            setFieldValue('dateOfRegistration', format(getDateOfRegistration(e.target.value, '1'), 'yyyy-MM-dd'))
+                                            setFieldValue('dateOfDissertationDefense', format(getDateOfDissertation(new Date(), e.target.value, '1', 15), 'yyyy-MM-dd'))
+                                        }, 50);
+                                    }}
+                                    onBlur={(e) => {
+                                    }}
+                                >
+                                    <option value="Bachelor">Бакалавриат</option>
+                                    <option value="Master">Магистратура</option>
+                                    <option value="PreCandidate">Аспирантура</option>
+                                    <option value="Specialist">Специалитет</option>
+                                </Field>
                                 <label className={s.arrows} htmlFor="academicDegree"><img src={arrows} alt="arrows"/></label>
                             </div>
 
@@ -165,9 +165,17 @@ const Salary = (props) => {
                                     id="dateOfRegistration"
                                     type="date"
                                     name="dateOfRegistration"
-                                    component={DateInput}
                                     disabled={values.academicDegree === 'Specialist'}
-                                />
+                                    component={DateInput}
+
+                                    // render={({ field /* { name, value, onChange, onBlur } */ }) => {
+                                    //     debugger
+                                    // }}
+
+
+                                >
+                                    {/*<DateInput id={"dateOfRegistration"} />*/}
+                                </Field>
                                 <ErrorMessage name="dateOfRegistration" render={
                                     err => {
                                         return (
