@@ -1,0 +1,118 @@
+trigger:
+- master
+
+resources:
+- repo: self
+
+pool:
+  vmImage: ubuntu-latest
+
+name: $(BuildID)-$(Build.SourceBranchName)
+
+variables:
+  ${{ if notIn(variables['Build.SourceBranchName'], 'master') }}:
+    buildImage: false
+    deployService: false
+    deployEnvironment: 'no'
+    imageTags: 'no'
+    serviceName: 'no'
+  ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+    buildImage: true
+    deployService: true
+    deployEnvironment: production
+    imageTags: |
+      $(Build.BuildId)
+      latest
+    serviceName: salary_front
+
+stages:
+- stage: Build
+  displayName: Bulid front
+  jobs:
+    - job: BuildFront
+      displayName: Build front
+      steps:
+      - task: file-creator@6
+        displayName: Create .env file
+        inputs:
+          filepath: '.env'
+          filecontent: 'REACT_APP_PRODUCTION_URL=https://salary.rtuitlab.dev/'
+          fileoverwrite: true
+          endWithNewLine: true
+      - task: Npm@1
+        displayName: npm ci
+        inputs:
+          command: 'ci'
+      - task: Npm@1
+        displayName: npm run build
+        inputs:
+          command: 'custom'
+          customCommand: 'build'
+      - task: CopyFiles@2
+        displayName: Copy build folder to deploy
+        inputs:
+          SourceFolder: '/build'
+          Contents: '**'
+          TargetFolder: '/deploy/frontend'
+          CleanTargetFolder: true
+          OverWrite: true
+      - task: CopyFiles@2
+        displayName: Copy Dockerfile to deploy folder
+        inputs:
+          SourceFolder: '/'
+          Contents: 'Dockerfile'
+          TargetFolder: '/deploy'
+          OverWrite: true
+      - publish: deploy
+        artifact: salary-front-build
+- stage: PackInDocker
+  displayName: Build docker image
+  condition: and(succeeded(), ${{variables.buildImage}})
+  jobs:
+  - job: Public
+    steps:
+      - checkout: none
+      - download: current
+        artifact: salary-front-build
+      - task: Docker@2
+        displayName: Build image for docker hub
+        inputs:
+          containerRegistry: 'rtuitlab connection by admin'
+          repository: 'rtuitlab/salary-front'
+          command: 'buildAndPush'
+          Dockerfile: '$(Pipeline.Workspace)/salary-front-build/Dockerfile'
+          buildContext: '$(Pipeline.Workspace)/salary-front-build'
+          tags: ${{variables.imageTags}}
+  - job: Private
+    steps:
+      - checkout: none
+      - download: current
+        artifact: salary-front-build
+      - task: Docker@2
+        displayName: Build image for private docker registry
+        inputs:
+          containerRegistry: 'private rtuitlab registry'
+          repository: 'rtuitlab/salary-front'
+          command: 'buildAndPush'
+          Dockerfile: '$(Pipeline.Workspace)/salary-front-build/Dockerfile'
+          buildContext: '$(Pipeline.Workspace)/salary-front-build'
+          tags: ${{variables.imageTags}}
+- stage: UpdateService
+  displayName: Update service
+  condition: and(succeeded(), ${{variables.deployService}})
+  jobs:
+  - deployment: Deploy
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: ${{variables.deployEnvironment}}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - download: none
+            - task: SSH@0
+              inputs:
+                sshEndpoint: 'swarm manager'
+                runOptions: 'commands'
+                commands: 'docker service update --image registry.rtuitlab.dev/rtuitlab/salary-front:$(Build.BuildId) ${{variables.serviceName}} --with-registry-auth'
+                readyTimeout: '20000'
