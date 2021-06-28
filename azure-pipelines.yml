@@ -36,7 +36,7 @@ stages:
       - task: file-creator@6
         displayName: Create .env file
         inputs:
-          filepath: '.env'
+          filepath: './.env'
           filecontent: 'REACT_APP_PRODUCTION_URL=https://salary.rtuitlab.dev/'
           fileoverwrite: true
           endWithNewLine: true
@@ -52,17 +52,17 @@ stages:
       - task: CopyFiles@2
         displayName: Copy build folder to deploy
         inputs:
-          SourceFolder: '/build'
+          SourceFolder: './build'
           Contents: '**'
-          TargetFolder: '/deploy/frontend'
+          TargetFolder: './deploy/frontend'
           CleanTargetFolder: true
           OverWrite: true
       - task: CopyFiles@2
         displayName: Copy Dockerfile to deploy folder
         inputs:
-          SourceFolder: '/'
+          SourceFolder: './'
           Contents: 'Dockerfile'
-          TargetFolder: '/deploy'
+          TargetFolder: './deploy'
           OverWrite: true
       - publish: deploy
         artifact: salary-front-build
