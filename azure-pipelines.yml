@@ -79,7 +79,7 @@ stages:
         displayName: Build image for docker hub
         inputs:
           containerRegistry: 'rtuitlab connection by admin'
-          repository: 'rtuitlab/salary-front'
+          repository: 'salary/salary-front'
           command: 'buildAndPush'
           Dockerfile: '$(Pipeline.Workspace)/salary-front-build/Dockerfile'
           buildContext: '$(Pipeline.Workspace)/salary-front-build'
@@ -93,7 +93,7 @@ stages:
         displayName: Build image for private docker registry
         inputs:
           containerRegistry: 'private rtuitlab registry'
-          repository: 'rtuitlab/salary-front'
+          repository: 'salary/salary-front'
           command: 'buildAndPush'
           Dockerfile: '$(Pipeline.Workspace)/salary-front-build/Dockerfile'
           buildContext: '$(Pipeline.Workspace)/salary-front-build'
@@ -115,5 +115,5 @@ stages:
               inputs:
                 sshEndpoint: 'swarm manager'
                 runOptions: 'commands'
-                commands: 'docker service update --image registry.rtuitlab.dev/rtuitlab/salary-front:$(Build.BuildId) ${{variables.serviceName}} --with-registry-auth'
+                commands: 'docker service update --image registry.rtuitlab.dev/salary/salary-front:$(Build.BuildId) ${{variables.serviceName}} --with-registry-auth'
                 readyTimeout: '20000'
