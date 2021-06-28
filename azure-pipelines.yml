@@ -1,5 +1,6 @@
 trigger:
 - master
+- azure-pipelines
 
 resources:
 - repo: self
@@ -47,7 +48,7 @@ stages:
         displayName: npm run build
         inputs:
           command: 'custom'
-          customCommand: 'build'
+          customCommand: 'run build'
       - task: CopyFiles@2
         displayName: Copy build folder to deploy
         inputs:
