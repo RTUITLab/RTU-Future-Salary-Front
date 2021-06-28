@@ -32,6 +32,13 @@ stages:
     - job: BuildFront
       displayName: Build front
       steps:
+      - task: file-creator@6
+        displayName: Create .env file
+        inputs:
+          filepath: '.env'
+          filecontent: 'REACT_APP_PRODUCTION_URL=https://salary.rtuitlab.dev/'
+          fileoverwrite: true
+          endWithNewLine: true
       - task: Npm@1
         displayName: npm ci
         inputs:
