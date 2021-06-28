@@ -17,7 +17,7 @@ variables:
     deployEnvironment: 'no'
     imageTags: 'no'
     serviceName: 'no'
-  ${{ if eq(variables['Build.SourceBranchName'], 'master', 'azure-pipelines') }}:
+  ${{ if or(eq(variables['Build.SourceBranchName'], 'master'), eq(variables['Build.SourceBranchName'], 'azure-pipelines')) }}:
     buildImage: true
     deployService: true
     deployEnvironment: production
