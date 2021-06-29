@@ -27,6 +27,18 @@ variables:
     serviceName: salary_front
 
 stages:
+- stage: PreBuild
+  displayName: Pre Build
+  jobs:
+  - job: PreBuild
+    displayName: Pre Build
+    steps:
+      - task: file-creator@6
+        inputs:
+          filepath: './.env'
+          filecontent: 'REACT_APP_PRODUCTION_URL=https://salary.rtuitlab.dev/'
+          fileoverwrite: true
+          endWithNewLine: true
 - stage: PackInDocker
   displayName: Build docker image
   condition: and(succeeded(), ${{variables.buildImage}})
