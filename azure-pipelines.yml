@@ -79,7 +79,7 @@ stages:
         displayName: Build image for docker hub
         inputs:
           containerRegistry: 'rtuitlab connection by admin'
-          repository: 'salary/salary-front'
+          repository: 'rtuitlab/salary-front'
           command: 'buildAndPush'
           Dockerfile: '$(Pipeline.Workspace)/salary-front-build/Dockerfile'
           buildContext: '$(Pipeline.Workspace)/salary-front-build'
