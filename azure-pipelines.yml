@@ -33,9 +33,6 @@ stages:
   jobs:
   - job: Public
     steps:
-      - checkout: none
-      - download: current
-        artifact: salary-front-build
       - task: Docker@2
         displayName: Build image for docker hub
         inputs:
@@ -47,9 +44,6 @@ stages:
           tags: ${{variables.imageTags}}
   - job: Private
     steps:
-      - checkout: none
-      - download: current
-        artifact: salary-front-build
       - task: Docker@2
         displayName: Build image for private docker registry
         inputs:
