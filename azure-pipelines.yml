@@ -27,45 +27,6 @@ variables:
     serviceName: salary_front
 
 stages:
-- stage: Build
-  displayName: Bulid front
-  jobs:
-    - job: BuildFront
-      displayName: Build front
-      steps:
-      - task: file-creator@6
-        displayName: Create .env file
-        inputs:
-          filepath: './.env'
-          filecontent: 'REACT_APP_PRODUCTION_URL=https://salary.rtuitlab.dev/'
-          fileoverwrite: true
-          endWithNewLine: true
-      - task: Npm@1
-        displayName: npm ci
-        inputs:
-          command: 'ci'
-      - task: Npm@1
-        displayName: npm run build
-        inputs:
-          command: 'custom'
-          customCommand: 'run build'
-      - task: CopyFiles@2
-        displayName: Copy build folder to deploy
-        inputs:
-          SourceFolder: './build'
-          Contents: '**'
-          TargetFolder: './deploy/frontend'
-          CleanTargetFolder: true
-          OverWrite: true
-      - task: CopyFiles@2
-        displayName: Copy Dockerfile to deploy folder
-        inputs:
-          SourceFolder: './'
-          Contents: 'Dockerfile'
-          TargetFolder: './deploy'
-          OverWrite: true
-      - publish: deploy
-        artifact: salary-front-build
 - stage: PackInDocker
   displayName: Build docker image
   condition: and(succeeded(), ${{variables.buildImage}})
@@ -81,8 +42,8 @@ stages:
           containerRegistry: 'rtuitlab connection by admin'
           repository: 'rtuitlab/salary-front'
           command: 'buildAndPush'
-          Dockerfile: '$(Pipeline.Workspace)/salary-front-build/Dockerfile'
-          buildContext: '$(Pipeline.Workspace)/salary-front-build'
+          Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+          buildContext: '$(Build.SourcesDirectory)'
           tags: ${{variables.imageTags}}
   - job: Private
     steps:
@@ -95,8 +56,8 @@ stages:
           containerRegistry: 'private rtuitlab registry'
           repository: 'salary/salary-front'
           command: 'buildAndPush'
-          Dockerfile: '$(Pipeline.Workspace)/salary-front-build/Dockerfile'
-          buildContext: '$(Pipeline.Workspace)/salary-front-build'
+          Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+          buildContext: '$(Build.SourcesDirectory)'
           tags: ${{variables.imageTags}}
 - stage: UpdateService
   displayName: Update service
