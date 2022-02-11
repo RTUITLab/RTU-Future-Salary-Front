@@ -10,7 +10,7 @@
     "classnames": "^2.2.6",
     "date-fns": "^2.19.0",
     "formik": "^2.2.6",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "rc-slider": "^9.7.1",
     "react": "^17.0.1",
     "react-device-detect": "^1.17.0",
